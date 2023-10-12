@@ -5,11 +5,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"%>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
 <!DOCTYPE html>
 <html lang="es">
+    <%
+        ConexionBD c = new ConexionBD();
+        c.mostrar();
+        
+        %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -430,19 +436,23 @@
 										</div>
 									</div>
 								</form>
+    
+                                                            <%
+                                                                while(c.rs.next()){
+                                                            %>
 								<div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>1. Client name</span>
-											<span class="mdl-list__item-sub-title">DNI</span>
+											<span><%=c.rs.getString("nombre")%></span>
+											<span class="mdl-list__item-sub-title"><%=c.rs.getString("nit") %></span>
 										</span>
 										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
-                                                                        
-                                                                        
-				
+                                   <%                                     
+                                       }
+				%>
 								</div>
 							</div>
 						</div>
