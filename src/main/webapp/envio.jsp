@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admin
-    Created on : 10/10/2023, 09:24:45
+    Document   : payments
+    Created on : 11/10/2023, 19:28:23
     Author     : Cesar S
 --%>
 
@@ -13,7 +13,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Administrators</title>
+	<title>Payments</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
@@ -121,7 +121,32 @@
 			</nav>
 		</div>
 	</div>
-	<!-- Barra de navegación lateral -->
+	<!-- navLateral -->
+<div class="full-width navBar">
+		<div class="full-width navBar-options">
+			<i class="zmdi zmdi-more-vert btn-menu" id="btn-menu"></i>	
+			<div class="mdl-tooltip" for="btn-menu">Menu</div>
+			<nav class="navBar-options-list">
+				<ul class="list-unstyle">
+					<li class="btn-Notification" id="notifications">
+						<i class="zmdi zmdi-notifications"></i>
+						<!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
+						<div class="mdl-tooltip" for="notifications">Notifications</div>
+					</li>
+					<li class="btn-exit" id="btn-exit">
+						<i class="zmdi zmdi-power"></i>
+						<div class="mdl-tooltip" for="btn-exit">LogOut</div>
+					</li>
+					<li class="text-condensedLight noLink" ><small>User Name</small></li>
+					<li class="noLink">
+						<figure>
+							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+						</figure>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
@@ -350,113 +375,49 @@
 			</nav>
 		</div>
 	</section>
+        
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-				<i class="zmdi zmdi-account"></i>
+				<i class="zmdi zmdi-card"></i>
 			</div>
 			<div class="full-width header-well-text">
-                           
 				<p class="text-condensedLight">
-                                    Añade un nuevo administrador en el sistema, o simplemenente consulta los administradores<br> (donde podrás modificar o eliminarlo).
+					Métodos de pago que los clientes podrán utilizar para pagar.
 				</p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">AÑADIR</a>
-				<a href="#tabListAdmin" class="mdl-tabs__tab">CONSULTAR</a>
+				<a href="#tabNewPayment" class="mdl-tabs__tab is-active">NUEVO</a>
+				<a href="#tabListPayment" class="mdl-tabs__tab">CONSULTAR</a>
 			</div>
-                    <!<!-- Pestaña para añadir nuevo administrador -->
-			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+			<div class="mdl-tabs__panel is-active" id="tabNewPayment">
 				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nuevo Administrador
+								Nuevo método de pago
 							</div>
 							<div class="full-width panel-content">
 								<form>
-									<div class="mdl-grid">
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-                    <!-- Datos personales del administrador -->
-                                                                                        <h5 class="text-condensedLight">Datos Personales</h5>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DPIAdmin">
-												<label class="mdl-textfield__label" for="DPIAdmin">DPI</label>
-												<span class="mdl-textfield__error">DPI Inválio</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreAdmin">
-												<label class="mdl-textfield__label" for="NombreAdmin">Nombre</label>
-												<span class="mdl-textfield__error">Nombre Inválido</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="ApellidoAdmin">
-												<label class="mdl-textfield__label" for="LastNameAdmin">Apellido</label>
-												<span class="mdl-textfield__error">Apellido Inválido</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="NumTelAdmin">
-												<label class="mdl-textfield__label" for="NumTelAdmin">Número Telefónico</label>
-												<span class="mdl-textfield__error">Número Telefónico Inválido</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="email" id="emailAdmin">
-												<label class="mdl-textfield__label" for="emailAdmin">E-mail</label>
-												<span class="mdl-textfield__error">E-mail Inválido</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="DireccionAdmin">
-												<label class="mdl-textfield__label" for="DireccionAdmin">Dirección</label>
-												<span class="mdl-textfield__error">Dirección Inválido</span>
-											</div>
-										</div>
-                    <!-- Información de la cuenta del administrador -->
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Detalles para iniciar sesión</h5>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin">
-												<label class="mdl-textfield__label" for="UserNameAdmin">Nombre de Usuario</label>
-												<span class="mdl-textfield__error">Nombre de Usuario Inválido</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="password" id="ContrasenaAdmin">
-												<label class="mdl-textfield__label" for="ContrasenaAdmin">Contraseña Admin</label>
-												<span class="mdl-textfield__error">Contraseña Inválida</span>
-											</div>
-											<h5 class="text-condensedLight">Elige tu Avatar</h5>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-												<input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
-												<img src="assets/img/avatar-male.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 1</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-												<input type="radio" id="option-2" class="mdl-radio__button" name="options" value="avatar-female.png">
-												<img src="assets/img/avatar-female.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 2</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-												<input type="radio" id="option-3" class="mdl-radio__button" name="options" value="avatar-male2.png">
-												<img src="assets/img/avatar-male2.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 3</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
-												<input type="radio" id="option-4" class="mdl-radio__button" name="options" value="avatar-female2.png">
-												<img src="assets/img/avatar-female2.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 4</span>
-											</label>
-										</div>
+									<h5 class="text-condensedLight">Datos del método</h5>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMetodoPago">
+										<label class="mdl-textfield__label" for="NombreMetodoPago">Nombre</label>
+										<span class="mdl-textfield__error">Nombre Inválido</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="DescripcionMetodoPago">
+										<label class="mdl-textfield__label" for="DescripcionMetodoPago">DescripcionMetodoPago</label>
+										<span class="mdl-textfield__error">Descripción Inválida</span>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addAdmin">Añadir Administrador</div>
+										<div class="mdl-tooltip" for="btn-addPayment">Añadir Método</div>
 									</p>
 								</form>
 							</div>
@@ -464,42 +425,52 @@
 					</div>
 				</div>
 			</div>
-                    <!-- Lista de administradores -->
-			<div class="mdl-tabs__panel" id="tabListAdmin">
+			<div class="mdl-tabs__panel" id="tabListPayment">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Consultar Admininstradores
+								List Payments
 							</div>
 							<div class="full-width panel-content">
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarAdmin">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchPayment">
 											<i class="zmdi zmdi-search"></i>
 										</label>
 										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarAdmin">
+											<input class="mdl-textfield__input" type="text" id="searchPayment">
 											<label class="mdl-textfield__label"></label>
 										</div>
 									</div>
 								</form>
 								<div class="mdl-list">
-                                                                    <!--OPCION: Crear nuevo HTML demostrando la información completa del administrador
-                                                                                O, ampliar la lista con los detalles del los administradores-->
-                                                                    
-                                                                    <!-- TODO: Añadir un bucle para que repita cada div -->
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>1. Nombre de Administrador</span>
-											<span class="mdl-list__item-sub-title">DPI</span>
+											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
+											<span>1. Payment method</span>
+											<span class="mdl-list__item-sub-title">Sub tittle</span>
 										</span>
 										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
-                                                                        
-									
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
+											<span>2. Payment method</span>
+											<span class="mdl-list__item-sub-title">Sub tittle</span>
+										</span>
+										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+									</div>
+									<li class="full-width divider-menu-h"></li>
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
+											<span>3. Payment method</span>
+											<span class="mdl-list__item-sub-title">Sub tittle</span>
+										</span>
+										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -147,7 +147,7 @@
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
 					<li class="full-width">
-						<a href="home.html" class="full-width">
+						<a href="home.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-view-dashboard"></i>
 							</div>
@@ -190,12 +190,12 @@
 								</a>
 							</li>
 							<li class="full-width">
-								<a href="payments.html" class="full-width">
+								<a href="envio.jsp" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-card"></i>
 									</div>
 									<div class="navLateral-body-cr hide-on-tablet">
-										PAGOS
+										METODOS DE ENVIO
 									</div>
 								</a>
 							</li>
@@ -355,7 +355,7 @@
 		<section class="full-width text-center" style="padding: 40px 0;">
 			<h3 class="text-center tittles">OPCIONES</h3>
 			<!-- Tiles -->
-                        <!<!-- TODO: -Añadirle cada ficha su correspondiente enlace 
+                        <!-- TODO: -Añadirle cada ficha su correspondiente enlace 
                                      -Configurar el contador para cada ficha con sus items correspondientes
                                             -Si no hay tiempo, solo borrar el número.-->
                         <a href="admin.jsp">

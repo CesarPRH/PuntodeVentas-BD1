@@ -2,6 +2,8 @@
     Document   : ordenes
     Created on : 11/10/2023, 10:31:04
     Author     : Cesar S
+
+NO SE HA TERMINADO
 --%>
 
 
@@ -235,12 +237,12 @@
 								</a>
 							</li>
 							<li class="full-width">
-								<a href="payments.html" class="full-width">
+								<a href="envio.html" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-card"></i>
 									</div>
 									<div class="navLateral-body-cr hide-on-tablet">
-										PAGOS
+										METODOS DE ENVIO
 									</div>
 								</a>
 							</li>
