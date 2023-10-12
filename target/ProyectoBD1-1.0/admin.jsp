@@ -192,7 +192,7 @@
 							<li class="full-width">
 								<a href="envio.jsp" class="full-width">
 									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-card"></i>
+										<i class="zmdi zmdi-bus"></i>
 									</div>
 									<div class="navLateral-body-cr hide-on-tablet">
 										METODOS DE ENVIO

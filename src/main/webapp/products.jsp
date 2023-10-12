@@ -236,7 +236,7 @@
 							<li class="full-width">
 								<a href="envio.jsp" class="full-width">
 									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-card"></i>
+										<i class="zmdi zmdi-bus"></i>
 									</div>
 									<div class="navLateral-body-cr hide-on-tablet">
 										METODOS DE ENVIO
@@ -450,7 +450,7 @@
 											
                                                                                                                                                         
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="PrecioProducto">
+												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto">
 												<label class="mdl-textfield__label" for="PrecioProducto">Precio</label>
 												<span class="mdl-textfield__error">Precio Inválido</span>
 											</div>
