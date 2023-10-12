@@ -43,7 +43,7 @@ public class ConexionBD {
           
        }
 
-       
+       //Hola mundo
        
    }
        public void mostrar() {
@@ -53,7 +53,7 @@ public class ConexionBD {
                    //SQL developer es raro :(
       ps = conn.prepareStatement("Select * from adminproyecto.clientes");
       rs = ps.executeQuery();
-      System.out.println("Hola mundo");
+      //System.out.println("Hola mundo");
        }catch (SQLException e) {
        System.err.println("SQLException: " + e.getMessage());
        e.printStackTrace();
