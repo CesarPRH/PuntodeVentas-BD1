@@ -255,7 +255,7 @@
 								</a>
 							</li>
                                                         <li>
-                                                            <a href="#" class="full-width">
+                                                            <a href="empleados.jsp" class="full-width">
                                                                 <div class="navLateral-body-cl">
                                                                         <i class="zmdi zmdi-account-box-mail"></i>
                                                                 </div>
@@ -266,8 +266,19 @@
                                                         </li>
 						</ul>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+                                        <li class="full-width">
+						<a href="#!" class="full-width btn-subMenu">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-mall"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTOS & VENTAS
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+							<li class="full-width">
 						<a href="products.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-washing-machine"></i>
@@ -277,8 +288,19 @@
 							</div>
 						</a>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+							<li class="full-width">
+						<a href="inventory.jsp" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-store"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								INVENTARIO
+							</div>
+						</a>
+					</li>
+                                        <li class="full-width divider-menu-h"></li>
+                                                        <li class="full-width">
 						<a href="sales.html" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
@@ -300,52 +322,8 @@
                                                 </div>
                                             </a>
                                         </li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventory.html" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-store"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								INVENTARIO
-							</div>
-						</a>
-					</li>
-				<!-- comment 	<li class="full-width divider-menu-h"></li>
-                                        
-                                        <li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								CONFIGURACIÓN
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
 						</ul>
-					</li>-->
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -354,6 +332,7 @@
 	<section class="full-width pageContent">
 		<section class="full-width text-center" style="padding: 40px 0;">
 			<h3 class="text-center tittles">OPCIONES</h3>
+                        <h2 style="text-decoration: underline">USUARIOS</h2>
 			<!-- Tiles -->
                         <!-- TODO: -Añadirle cada ficha su correspondiente enlace 
                                      -Configurar el contador para cada ficha con sus items correspondientes
@@ -380,7 +359,7 @@
 				<i class="zmdi zmdi-accounts tile-icon"></i>
 			</article>
                             </a>
-                        <a href="#">
+                        <a href="empleados.jsp">
                         <article class="full-width tile">
                             <div class="tile-text">
                                 <span class="text-condensedLight">
@@ -389,7 +368,8 @@
                                 </span>
                             </div>
                             <i class="zmdi zmdi-account-box-mail tile-icon"></i>
-                        </article>
+                        </article></a>
+                            <h2>ADMINISTRACIÓN</h2>
                             <a href="providers.jsp">
 			<article class="full-width tile">
 				<div class="tile-text">
@@ -412,6 +392,30 @@
 				<i class="zmdi zmdi-label tile-icon"></i>
 			</article>
                         </a>
+                        </a>
+                            <a href="marcas.jsp">
+                        <article class="full-width tile">
+                            <div class="tile-text">
+                                <span class="text-condensedLight">
+                                    Holamundo<br>
+                                    <small>Marcas</small>
+                                </span>
+                            </div>
+                            <i class="zmdi zmdi-tag tile-icon"></i>
+                        </article>
+                            </a>
+                        <a href="envio.jsp">
+                            <article class="full-width tile">
+                                <div class="tile-text">
+                                    <span class="text-condensedLight">
+                                        a<br>
+                                        <small>Métodos de Envío</small>
+                                    </span>
+                                </div>
+                                <i class="zmdi zmdi-bus tile-icon"></i>
+                            </article>
+                        </a>
+                        <h2>Productos y Ventas</h2>
                         <a href="products.jsp">
 			<article class="full-width tile">
 				<div class="tile-text">
@@ -423,6 +427,16 @@
 				<i class="zmdi zmdi-washing-machine tile-icon"></i>
 			</article>
                             </a>
+                        <a href="inventory.jsp">
+                            <article class="full-width tile">
+                                <div class="tile-text">
+                                    <span class="text-condensedLight">
+                                        Inventario
+                                    </span>
+                                </div>
+                                <i class="zmdi zmdi-store tile-icon"></i>
+                            </article>
+                        </a>
                             <a href="#">
 			<article class="full-width tile">
 				<div class="tile-text">
@@ -443,19 +457,8 @@
                             </div>
                             <i class="zmdi zmdi-shopping-cart-plus tile-icon"></i>
                         </article>
-                            </a>
-                            <a href="marcas.jsp">
-                        <article class="full-width tile">
-                            <div class="tile-text">
-                                <span class="text-condensedLight">
-                                    Holamundo<br>
-                                    <small>Marcas</small>
-                                </span>
-                            </div>
-                            <i class="zmdi zmdi-tag tile-icon"></i>
-                        </article>
-                            </a>
-                            <a href="prueba.jsp">Hola mundo</a>
+                            
+                            <!--<a href="prueba.jsp">Hola mundo</a>-->
 		</section>
             
             

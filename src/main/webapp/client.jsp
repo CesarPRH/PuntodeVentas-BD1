@@ -127,6 +127,7 @@
 			</nav>
 		</div>
 	</div>
+	<!-- navLateral -->
 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
@@ -139,8 +140,7 @@
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
-                                            <!-- TODO: Configurar nombre aquí
-                                                        Configurar cada botón para redirigir a sus páginas correspondientes-->
+                                            <!-- TODO: Configurar nombre aquí -->
 						Nombre completo<br>
 						<small>Admin</small>
 					</span>
@@ -260,7 +260,7 @@
 								</a>
 							</li>
                                                         <li>
-                                                            <a href="#" class="full-width">
+                                                            <a href="empleados.jsp" class="full-width">
                                                                 <div class="navLateral-body-cl">
                                                                         <i class="zmdi zmdi-account-box-mail"></i>
                                                                 </div>
@@ -271,9 +271,20 @@
                                                         </li>
 						</ul>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="products.html" class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+                                        <li class="full-width">
+						<a href="#!" class="full-width btn-subMenu">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-mall"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTOS & VENTAS
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+							<li class="full-width">
+						<a href="products.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-washing-machine"></i>
 							</div>
@@ -282,8 +293,19 @@
 							</div>
 						</a>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+							<li class="full-width">
+						<a href="inventory.jsp" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-store"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								INVENTARIO
+							</div>
+						</a>
+					</li>
+                                        <li class="full-width divider-menu-h"></li>
+                                                        <li class="full-width">
 						<a href="sales.html" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
@@ -305,52 +327,8 @@
                                                 </div>
                                             </a>
                                         </li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventory.html" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-store"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								INVENTARIO
-							</div>
-						</a>
-					</li>
-				<!-- comment 	<li class="full-width divider-menu-h"></li>
-                                        
-                                        <li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								CONFIGURACIÓN
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
 						</ul>
-					</li>-->
+					</li>
 				</ul>
 			</nav>
 		</div>

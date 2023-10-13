@@ -11,6 +11,16 @@ NO SE HA TERMINADO
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
+<!--  TABLAS ENLAZADAS 
+    ordenes
+    detalles_ordenes
+    TODO: Arreglar Todo
+    TODO: Programar que se pueda añadir más de un producto
+            -Preguntar algo como, "desea añadir otro producto?"
+    TODO: El momento de finalizar el orden, redirigir a pagina envio
+            Donde se deberá añadir la direccion del cliente
+    TODO: Añadir dicho orden a la pagina Ventas
+-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -144,32 +154,7 @@ NO SE HA TERMINADO
         
         
 	<!-- navLateral -->
-  	<div class="full-width navBar">
-		<div class="full-width navBar-options">
-			<i class="zmdi zmdi-more-vert btn-menu" id="btn-menu"></i>	
-			<div class="mdl-tooltip" for="btn-menu">Menu</div>
-			<nav class="navBar-options-list">
-				<ul class="list-unstyle">
-					<li class="btn-Notification" id="notifications">
-						<i class="zmdi zmdi-notifications"></i>
-						<!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
-						<div class="mdl-tooltip" for="notifications">Notifications</div>
-					</li>
-					<li class="btn-exit" id="btn-exit">
-						<i class="zmdi zmdi-power"></i>
-						<div class="mdl-tooltip" for="btn-exit">LogOut</div>
-					</li>
-					<li class="text-condensedLight noLink" ><small>User Name</small></li>
-					<li class="noLink">
-						<figure>
-							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
-						</figure>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<section class="full-width navLateral">
+ 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
 			<div class="full-width navLateral-body-logo text-center tittles">
@@ -181,8 +166,7 @@ NO SE HA TERMINADO
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
-                                            <!-- TODO: Configurar nombre aquí
-                                                        Configurar cada botón para redirigir a sus páginas correspondientes-->
+                                            <!-- TODO: Configurar nombre aquí -->
 						Nombre completo<br>
 						<small>Admin</small>
 					</span>
@@ -237,7 +221,7 @@ NO SE HA TERMINADO
 								</a>
 							</li>
 							<li class="full-width">
-								<a href="envio.html" class="full-width">
+								<a href="envio.jsp" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-bus"></i>
 									</div>
@@ -302,7 +286,7 @@ NO SE HA TERMINADO
 								</a>
 							</li>
                                                         <li>
-                                                            <a href="#" class="full-width">
+                                                            <a href="empleados.jsp" class="full-width">
                                                                 <div class="navLateral-body-cl">
                                                                         <i class="zmdi zmdi-account-box-mail"></i>
                                                                 </div>
@@ -313,9 +297,20 @@ NO SE HA TERMINADO
                                                         </li>
 						</ul>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="products.html" class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+                                        <li class="full-width">
+						<a href="#!" class="full-width btn-subMenu">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-mall"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTOS & VENTAS
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+							<li class="full-width">
+						<a href="products.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-washing-machine"></i>
 							</div>
@@ -324,8 +319,19 @@ NO SE HA TERMINADO
 							</div>
 						</a>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+							<li class="full-width">
+						<a href="inventory.jsp" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-store"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								INVENTARIO
+							</div>
+						</a>
+					</li>
+                                        <li class="full-width divider-menu-h"></li>
+                                                        <li class="full-width">
 						<a href="sales.html" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
@@ -347,57 +353,12 @@ NO SE HA TERMINADO
                                                 </div>
                                             </a>
                                         </li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventory.html" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-store"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								INVENTARIO
-							</div>
-						</a>
-					</li>
-				<!-- comment 	<li class="full-width divider-menu-h"></li>
-                                        
-                                        <li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								CONFIGURACIÓN
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
 						</ul>
-					</li>-->
+					</li>
 				</ul>
 			</nav>
 		</div>
 	</section>
-        
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
@@ -420,66 +381,42 @@ NO SE HA TERMINADO
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nuevo producto
+								Nuevo órden
 							</div><!--Hola Mundo-->
 							<div class="full-width panel-content">
 								<form>
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Información Básica del órden</h5>
-											
+                                                                                        <!-- Id_cliente, pertenece a tabla ordenes -->
+                                                                                        <!-- Busquedas instantaneas se implementarán de último. -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreProducto">
-												<label class="mdl-textfield__label" for="NombreProducto">Name</label>
-												<span class="mdl-textfield__error">Nombre Inválido</span>
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdClienteOrden">
+												<label class="mdl-textfield__label" for="IdClienteOrden">Escriba el código de cliente aquí</label>
+												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
 											</div>
-											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Selecciona categoría</option>
-                                                                    <!-- Aquí se va a utilizar un ciclo para mostrar todas las categorías -->
-													<option value="">Category 1</option>
-													<option value="">Category 2</option>
-												</select>
-											</div>
-                                                                                        <div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Selecciona Marca</option>
-                                                                    <!-- Aquí se va a utilizar un ciclo para mostrar todas las categorías -->
-													<option value="">Marca 1</option>
-													<option value="">Marca 2</option>
-												</select>
-											</div>
-											<h5 class="text-condensedLight">Precio y descuento</h5>
-											
-                                                                                                                                                        
+                                                                                        <!-- Id_productos, pertenece a tabla detalle_ordenes -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto">
-												<label class="mdl-textfield__label" for="PrecioProducto">Precio</label>
-												<span class="mdl-textfield__error">Precio Inválido</span>
+                                                                                        
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<label class="mdl-textfield__label" for="IdProductoOrden">Escriba el código del producto aquí</label>
+												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
 											</div>
-                                                                    <!--Con esto, podemos utilizarlo para añadir una nueva página "promociones" que contienen todos los productos con descuentos. -->
-                                                                    <!--Si no le queremos poner descuento, lo dejamos a 0.-->
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DescuentoProducto">
-												<label class="mdl-textfield__label" for="DescuentoProducto">% Descuento</label>
-												<span class="mdl-textfield__error">Descuento Inválido</span>
-											</div>	
-										</div>
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Proveedor</h5>
-											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Selecciona proveedor</option>
-                                                                    <!-- Igual que la categoría y marca -->
-                                                                                                        <option value="">Proveedor 1</option>
-													<option value="">Proveedor 2</option>
-												</select>
+                                                                                        
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                                            <p>Escriba la cantidad del producto.</p>
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<label class="mdl-textfield__label" for="IdProductoOrden">X</label>
+												<span class="mdl-textfield__error"></span>
 											</div>
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="StockProducto">
-												<label class="mdl-textfield__label" for="StockProducto"> Stock disponible</label>
-												<span class="mdl-textfield__error">Stock Inválido</span>
-											</div>         
+                                                                                            <p>Total: </p>
+											</div>
+                                                                                        
+										</div>
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+											<h5 class="text-condensedLight">Información adicional:</h5>
+				        
                                    
                                                                                         <!--
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -512,7 +449,7 @@ NO SE HA TERMINADO
 										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addProduct">Añadir producto</div>
+										<div class="mdl-tooltip" for="btn-addProduct">Añadir producto al órden</div>
 									</p>
 								</form>
 							</div>

@@ -8,6 +8,10 @@
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
+<!-- TABLAS ENLAZADAS A ESTE JSP 
+     Usuario
+     Empleado - El puesto automaticamente será administrador.
+-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -134,8 +138,7 @@
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
-                                            <!-- TODO: Configurar nombre aquí
-                                                        Configurar cada botón para redirigir a sus páginas correspondientes-->
+                                            <!-- TODO: Configurar nombre aquí -->
 						Nombre completo<br>
 						<small>Admin</small>
 					</span>
@@ -255,7 +258,7 @@
 								</a>
 							</li>
                                                         <li>
-                                                            <a href="#" class="full-width">
+                                                            <a href="empleados.jsp" class="full-width">
                                                                 <div class="navLateral-body-cl">
                                                                         <i class="zmdi zmdi-account-box-mail"></i>
                                                                 </div>
@@ -266,9 +269,20 @@
                                                         </li>
 						</ul>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="products.html" class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+                                        <li class="full-width">
+						<a href="#!" class="full-width btn-subMenu">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-mall"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTOS & VENTAS
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+							<li class="full-width">
+						<a href="products.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-washing-machine"></i>
 							</div>
@@ -277,8 +291,19 @@
 							</div>
 						</a>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
+                                        <li class="full-width divider-menu-h"></li>
+							<li class="full-width">
+						<a href="inventory.jsp" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-store"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								INVENTARIO
+							</div>
+						</a>
+					</li>
+                                        <li class="full-width divider-menu-h"></li>
+                                                        <li class="full-width">
 						<a href="sales.html" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
@@ -300,52 +325,8 @@
                                                 </div>
                                             </a>
                                         </li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventory.html" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-store"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								INVENTARIO
-							</div>
-						</a>
-					</li>
-				<!-- comment 	<li class="full-width divider-menu-h"></li>
-                                        
-                                        <li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								CONFIGURACIÓN
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPTION
-									</div>
-								</a>
-							</li>
 						</ul>
-					</li>-->
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -383,12 +364,12 @@
                     <!-- Datos personales del administrador -->
                                                                                         <h5 class="text-condensedLight">Datos Personales</h5>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DPIAdmin">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DPIEmpleado">
 												<label class="mdl-textfield__label" for="DPIAdmin">DPI</label>
 												<span class="mdl-textfield__error">DPI Inválio</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreAdmin">
+												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="ApellidoEmpleado">
 												<label class="mdl-textfield__label" for="NombreAdmin">Nombre</label>
 												<span class="mdl-textfield__error">Nombre Inválido</span>
 											</div>
