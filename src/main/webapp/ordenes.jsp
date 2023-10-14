@@ -332,7 +332,7 @@ NO SE HA TERMINADO
 					</li>
                                         <li class="full-width divider-menu-h"></li>
                                                         <li class="full-width">
-						<a href="sales.html" class="full-width">
+						<a href="sales.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>

@@ -25,13 +25,25 @@
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="css/main.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')</script>
 	<script src="js/material.min.js" ></script>
 	<script src="js/sweetalert2.min.js" ></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
 </head>
 <body>
+    <!-- Script para habilitar la sección de promoción -->
+    <script>
+$(document).ready(function(){
+    $("#toggle").change(function(){
+        if(this.checked){
+            $(".mdl-textfield__input.disable").prop('disabled', false);
+        } else {
+            $(".mdl-textfield__input.disable").prop('disabled', true);
+        }
+    });
+});
+</script>
 	<!-- Notifications area -->
 	<section class="full-width container-notifications">
 		<div class="full-width container-notifications-bg btn-Notification"></div>
@@ -323,7 +335,7 @@
 					</li>
                                         <li class="full-width divider-menu-h"></li>
                                                         <li class="full-width">
-						<a href="sales.html" class="full-width">
+						<a href="sales.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
@@ -358,14 +370,13 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-                                    Añade, consulta o edita algún producto.
+                                    Añade un nuevo producto. Para consultar los productos, visita el inventario.
                                 </p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewProduct" class="mdl-tabs__tab is-active">NEW</a>
-				<a href="#tabListProducts" class="mdl-tabs__tab">CONSULTAR</a>
+
 			</div>
 			<div class="mdl-tabs__panel is-active" id="tabNewProduct">
 				<div class="mdl-grid">
@@ -401,7 +412,7 @@
 													<option value="">Marca 2</option>
 												</select>
 											</div>
-											<h5 class="text-condensedLight">Precio y descuento</h5>
+											
 											
                                                                                                                                                         
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -411,11 +422,8 @@
 											</div>
                                                                     <!--Con esto, podemos utilizarlo para añadir una nueva página "promociones" que contienen todos los productos con descuentos. -->
                                                                     <!--Si no le queremos poner descuento, lo dejamos a 0.-->
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DescuentoProducto">
-												<label class="mdl-textfield__label" for="DescuentoProducto">% Descuento</label>
-												<span class="mdl-textfield__error">Descuento Inválido</span>
-											</div>	
+                                                                    <br>
+                                                                    
 										</div>
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Proveedor</h5>
@@ -432,32 +440,32 @@
 												<label class="mdl-textfield__label" for="StockProducto"> Stock disponible</label>
 												<span class="mdl-textfield__error">Stock Inválido</span>
 											</div>         
-                                   
-                                                                                        <!--
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text"  id="modelProduct">
-												<label class="mdl-textfield__label" for="modelProduct">Model</label>
-												<span class="mdl-textfield__error">Invalid model</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="markProduct">
-												<label class="mdl-textfield__label" for="markProduct">Mark</label>
-												<span class="mdl-textfield__error">Invalid Mark</span>
-											</div>
-											<h5 class="text-condensedLight">Other Data</h5>
-											<div class="mdl-textfield mdl-js-textfield">
-												<input type="date" class="mdl-textfield__input">
-											</div>
-											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Select status</option>
-													<option value="">Active</option>
-													<option value="">deactivated</option>
-												</select>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield">
-												<input type="file">
-											</div>-->
+                                                                                        <div><input type="checkbox" id="toggle" >       Promoción   </div>
+                                                                                        
+                                                                                        
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
+												<input class="mdl-textfield__input disable" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DescuentoProducto" disabled >
+												<label class="mdl-textfield__label" for="DescuentoProducto">% Descuento</label>
+												<span class="mdl-textfield__error">Descuento Inválido</span>
+											</div>	
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " disabled="true">
+												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreDescuento" disabled>
+												<label class="mdl-textfield__label" for="NombreDescuento">Nombre de la promoción</label>
+												<span class="mdl-textfield__error">Nombre Inválido</span>
+											</div>	
+                         
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " disabled="true">
+												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="DescripcionProducto" disabled>
+												<label class="mdl-textfield__label" for="DescripcionProducto">Descripcion</label>
+												<span class="mdl-textfield__error">Descripcion inválida</span>
+											</div>	
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" disabled="true">
+												<input class="mdl-textfield__input disable" type="date" pattern="-?[0-9]*(\.[0-9]+)?" id="FechaFinalDescuento" disabled=>
+												<label class="mdl-textfield__label" for="FechaFinalDescuento">Fecha Final</label>
+												<span class="mdl-textfield__error">Fecha inválida</span>
+											</div>	
+                                                                                        
+                                                                                        
 										</div>
 									</div>
 									<p class="text-center">
@@ -473,95 +481,14 @@
 				</div>
 			</div>
                     
-                    <!<!-- Aquí tengo pequeños problemas, creo que es mejor cambiar todo esto a una simple lista. -->
-			<div class="mdl-tabs__panel" id="tabListProducts">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-						<form action="#">
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-								<label class="mdl-button mdl-js-button mdl-button--icon" for="searchProduct">
-									<i class="zmdi zmdi-search"></i>
-								</label>
-								<div class="mdl-textfield__expandable-holder">
-									<input class="mdl-textfield__input" type="text" id="searchProduct">
-									<label class="mdl-textfield__label"></label>
-								</div>
-							</div>
-						</form>
-						<nav class="full-width menu-categories">
-							<ul class="list-unstyle text-center">
-								<li><a href="#!">Category 1</a></li>
-								<li><a href="#!">Category 2</a></li>
-								<li><a href="#!">Category 3</a></li>
-								<li><a href="#!">Category 4</a></li>
-							</ul>
-						</nav>
-						<div class="full-width text-center" style="padding: 30px 0;">
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                   
+                    
 		</div>
 	</section>
+
+       
+
+    
 </body>
+
 </html>

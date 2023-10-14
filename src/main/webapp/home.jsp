@@ -301,7 +301,7 @@
 					</li>
                                         <li class="full-width divider-menu-h"></li>
                                                         <li class="full-width">
-						<a href="sales.html" class="full-width">
+						<a href="sales.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
@@ -437,7 +437,7 @@
                                 <i class="zmdi zmdi-store tile-icon"></i>
                             </article>
                         </a>
-                            <a href="#">
+                            <a href="sales.jsp">
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
@@ -457,7 +457,19 @@
                             </div>
                             <i class="zmdi zmdi-shopping-cart-plus tile-icon"></i>
                         </article>
-                            
+                            </a>
+                        <!-- comment 
+                            <a>
+                                <article class="full-width tile">
+                            <div class="tile-text">
+                                <span class="text-condensedLight">
+                                    Hola<br>
+                                    <small>Ventas (En la tienda)</small>
+                            </div>
+                            <i class="zmdi zmdi-shopping-cart-plus tile-icon"></i>
+                        </article>
+                            </a>
+                            -->
                             <!--<a href="prueba.jsp">Hola mundo</a>-->
 		</section>
             

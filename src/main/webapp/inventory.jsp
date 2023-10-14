@@ -303,7 +303,7 @@
 					</li>
                                         <li class="full-width divider-menu-h"></li>
                                                         <li class="full-width">
-						<a href="sales.html" class="full-width">
+						<a href="sales.jsp" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
@@ -348,15 +348,15 @@
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
 					<thead>
 						<tr>
-							<th class="mdl-data-table__cell--non-numeric">Name</th>
-							<th>Code</th>
+							<th class="mdl-data-table__cell--non-numeric">Nombre</th>
+							<th>Código</th>
 							<th>Stock</th>
-							<th>Price</th>
-							<th>Options</th>
+							<th>Precio</th>
+							<th>Opciones</th>
 						</tr>
 					</thead>
 					<tbody>
-                                            <!-- TODO: Poner en ciclo todos los productos aquí -->
+                                    <!-- TODO: Poner en ciclo todos los productos aquí -->
 						<tr>
 							<td class="mdl-data-table__cell--non-numeric">Product Name</td>
 							<td>Product Code</td>

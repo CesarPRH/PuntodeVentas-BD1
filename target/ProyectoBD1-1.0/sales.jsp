@@ -1,6 +1,6 @@
 <%-- 
-    Document   : marcas
-    Created on : 10/10/2023, 14:23:38
+    Document   : sales
+    Created on : 14/10/2023, 07:37:06
     Author     : Cesar S
 --%>
 
@@ -8,15 +8,12 @@
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
-<!-- TABLAS ENLAZADAS 
-    marcas
--->
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Marcas</title>
+	<title>Sales</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
@@ -329,99 +326,125 @@
 				</ul>
 			</nav>
 		</div>
-	</section> 
+	</section>
+        
 	<!-- pageContent -->
-	<section class="full-width pageContent">
+        
+        
+        
+        <section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-                            <i class="zmdi zmdi-tag"></i>
-
+				<i class="zmdi zmdi-account"></i>
 			</div>
 			<div class="full-width header-well-text">
+                           
 				<p class="text-condensedLight">
-                                   Las marcas de nuestro diferentes productos.
-                                </p>
+                                    Añade un nuevo empleado en el sistema, o simplemenente consulta los administradores<br> (donde podrás modificar o eliminarlo).
+				</p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewCategory" class="mdl-tabs__tab is-active">NUEVO</a>
-				<a href="#tabListCategory" class="mdl-tabs__tab">CONSULTAR</a>
+				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">VENTAS</a>
+				<a href="#tabListAdmin" class="mdl-tabs__tab">DEVOLUCIONES</a>
 			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewCategory">
+                    <!<!-- Pestaña para añadir nuevo administrador -->
+			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
 				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nueva marca
+								VENTAS
 							</div>
 							<div class="full-width panel-content">
 								<form>
-                                                                    <!--Utilizando queries, podemos meter: id_categorias, estado -->
-									<h5 class="text-condensedLight">Datos de la categoría</h5>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMarca">
-										<label class="mdl-textfield__label" for="NombreMarca">Nombre</label>
-										<span class="mdl-textfield__error">Nombre Inválido</span>
-									</div>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="PaisMarca">
-										<label class="mdl-textfield__label" for="PaisMarca">País Origen</label>
-										<span class="mdl-textfield__error">País Inválido</span>
-									</div>
-									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addCategory">
-											<i class="zmdi zmdi-plus"></i>
-										</button>
-										<div class="mdl-tooltip" for="btn-addCategory">Añadir marca</div>
-									</p>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="mdl-tabs__panel" id="tabListCategory">
+									<div class="mdl-grid">
+                                                                            <!-- Tabla de ventas -->
+                                                                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop" id="ventas">
+                                                                                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+                                                                                                <thead>
+                                                                                                        <tr>
+                                                                                                                <th class="mdl-data-table__cell--non-numeric">Date</th>
+                                                                                                                <th>Client</th>
+                                                                                                                <th>Payment</th>
+                                                                                                                <th>Total</th>
+                                                                                                                <th>Options</th>
+                                                                                                        </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                        <tr>
+                                                                                                                <td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
+                                                                                                                <td>Client name</td>
+                                                                                                                <td>Credit</td>
+                                                                                                                <td>$77</td>
+                                                                                                                <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+                                                                                                        </tr>
+
+                                                                                                </tbody>
+                                                                                        </table>
+                                                                                </div>
+
+
+
+                                                                                                                                </div>
+
+                                                                                                                        </form>
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+
+			<div class="mdl-tabs__panel" id="tabListAdmin">
 				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop ">
 						<div class="full-width panel mdl-shadow--2dp">
-							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de marcas
+							
+							<div class="full-width panel-tittle bg-danger text-center tittles">
+								DEVOLUCIONES
 							</div>
 							<div class="full-width panel-content">
-								<form action="#">
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMarca">
-											<i class="zmdi zmdi-search"></i>
-										</label>
-										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarMarca">
-											<label class="mdl-textfield__label"></label>
-										</div>
+								<form>
+									<div class="mdl-grid">
+                                                                            <!-- Tabla de devoluciones -->
+                                                                            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop" id="ventas">
+                                                                                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+                                                                                                <thead>
+                                                                                                        <tr>
+                                                                                                                <th class="mdl-data-table__cell--non-numeric">Date</th>
+                                                                                                                <th>Id del órden</th>
+                                                                                                                <th>motivo</th>
+                                                                                                                <th>fecha de solicitud</th>
+                                                                                                                <th>Options</th>
+                                                                                                        </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                        <tr>
+                                                                                                                <td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
+                                                                                                                <td>Client name</td>
+                                                                                                                <td>Credit</td>
+                                                                                                                <td>$77</td>
+                                                                                                                <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+                                                                                                        </tr>
+
+                                                                                                </tbody>
+                                                                                        </table>
+                                                                                </div>
+                    
+    
+										
 									</div>
+									
 								</form>
-								<div class="mdl-list">
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
-											<span>1. Marca name</span>
-											<span class="mdl-list__item-sub-title">Sub title</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-                                                                        
-                                                                        
-			
-                                                                        
-								</div>
 							</div>
-						</div>
 						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+     
 </body>
 </html>

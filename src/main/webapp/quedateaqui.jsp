@@ -1,22 +1,31 @@
 <%-- 
-    Document   : marcas
-    Created on : 10/10/2023, 14:23:38
+    Document   : ordenes
+    Created on : 11/10/2023, 10:31:04
     Author     : Cesar S
+
+NO SE HA TERMINADO
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
-<!-- TABLAS ENLAZADAS 
-    marcas
+<!--  TABLAS ENLAZADAS 
+    ordenes
+    detalles_ordenes
+    TODO: Arreglar Todo
+    TODO: Programar que se pueda añadir más de un producto
+            -Preguntar algo como, "desea añadir otro producto?"
+    Esta página es igual a la de ordenes. La unica diferencia es que esta no lleva a la pagina de envio, ya que es presencial.
+    TODO: Añadir dicho orden a la pagina Ventas
 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Marcas</title>
+	<title>Ventas</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
@@ -105,7 +114,6 @@
 			<div class="mdl-tooltip" for="btn-menu">Menu</div>
 			<nav class="navBar-options-list">
 				<ul class="list-unstyle">
-					<li class="btn-Notification" id="notifications">
 						<i class="zmdi zmdi-notifications"></i>
 						<!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
 						<div class="mdl-tooltip" for="notifications">Notifications</div>
@@ -123,9 +131,29 @@
 				</ul>
 			</nav>
 		</div>
+	</div>				<li class="btn-Notification" id="notifications">
+						<i class="zmdi zmdi-notifications"></i>
+						<!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
+						<div class="mdl-tooltip" for="notifications">Notifications</div>
+					</li>
+					<li class="btn-exit" id="btn-exit">
+						<i class="zmdi zmdi-power"></i>
+						<div class="mdl-tooltip" for="btn-exit">LogOut</div>
+					</li>
+					<li class="text-condensedLight noLink" ><small>User Name</small></li>
+					<li class="noLink">
+						<!--<figure>
+							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+						</figure>-->
+					</li>
+				</ul>
+			</nav>
+		</div>
 	</div>
+        
+        
 	<!-- navLateral -->
-	<section class="full-width navLateral">
+ 	<section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
 			<div class="full-width navLateral-body-logo text-center tittles">
@@ -303,7 +331,7 @@
 					</li>
                                         <li class="full-width divider-menu-h"></li>
                                                         <li class="full-width">
-						<a href="sales.jsp" class="full-width">
+						<a href="sales.html" class="full-width">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
@@ -329,51 +357,98 @@
 				</ul>
 			</nav>
 		</div>
-	</section> 
+	</section>
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-                            <i class="zmdi zmdi-tag"></i>
-
+				<i class="zmdi zmdi-washing-machine"></i>
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-                                   Las marcas de nuestro diferentes productos.
+                                    Pone un órden a un producto.<br>
+                                    Los órdenes son ventas hecho al interior del país.
                                 </p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewCategory" class="mdl-tabs__tab is-active">NUEVO</a>
-				<a href="#tabListCategory" class="mdl-tabs__tab">CONSULTAR</a>
+				<a href="#tabNewProduct" class="mdl-tabs__tab is-active">NUEVO</a>
 			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewCategory">
+			<div class="mdl-tabs__panel is-active" id="tabNewProduct">
 				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nueva marca
-							</div>
+								Nuevo órden
+							</div><!--Hola Mundo-->
 							<div class="full-width panel-content">
 								<form>
-                                                                    <!--Utilizando queries, podemos meter: id_categorias, estado -->
-									<h5 class="text-condensedLight">Datos de la categoría</h5>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMarca">
-										<label class="mdl-textfield__label" for="NombreMarca">Nombre</label>
-										<span class="mdl-textfield__error">Nombre Inválido</span>
-									</div>
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="PaisMarca">
-										<label class="mdl-textfield__label" for="PaisMarca">País Origen</label>
-										<span class="mdl-textfield__error">País Inválido</span>
+									<div class="mdl-grid">
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+											<h5 class="text-condensedLight">Información Básica de la venta</h5>
+                                                                                        <!-- Id_cliente, pertenece a tabla ordenes -->
+                                                                                        <!-- Busquedas instantaneas se implementarán de último. -->
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdClienteOrden">
+												<label class="mdl-textfield__label" for="IdClienteOrden">Escriba el código de cliente aquí</label>
+												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
+											</div>
+                                                                                        <!-- Id_productos, pertenece a tabla detalle_ordenes -->
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                                        
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<label class="mdl-textfield__label" for="IdProductoOrden">Escriba el código del producto aquí</label>
+												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
+											</div>
+                                                                                        
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                                            <p>Escriba la cantidad del producto.</p>
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<label class="mdl-textfield__label" for="IdProductoOrden">X</label>
+												<span class="mdl-textfield__error"></span>
+											</div>
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                                            <p>Total: </p>
+											</div>
+                                                                                        
+										</div>
+										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+											<h5 class="text-condensedLight">Información adicional:</h5>
+				        
+                                   
+                                                                                        <!--
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												<input class="mdl-textfield__input" type="text"  id="modelProduct">
+												<label class="mdl-textfield__label" for="modelProduct">Model</label>
+												<span class="mdl-textfield__error">Invalid model</span>
+											</div>
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												<input class="mdl-textfield__input" type="text" id="markProduct">
+												<label class="mdl-textfield__label" for="markProduct">Mark</label>
+												<span class="mdl-textfield__error">Invalid Mark</span>
+											</div>
+											<h5 class="text-condensedLight">Other Data</h5>
+											<div class="mdl-textfield mdl-js-textfield">
+												<input type="date" class="mdl-textfield__input">
+											</div>
+											<div class="mdl-textfield mdl-js-textfield">
+												<select class="mdl-textfield__input">
+													<option value="" disabled="" selected="">Select status</option>
+													<option value="">Active</option>
+													<option value="">deactivated</option>
+												</select>
+											</div>
+											<div class="mdl-textfield mdl-js-textfield">
+												<input type="file">
+											</div>-->
+										</div>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addCategory">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addCategory">Añadir marca</div>
+										<div class="mdl-tooltip" for="btn-addProduct">Añadir producto al órden</div>
 									</p>
 								</form>
 							</div>
@@ -381,46 +456,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="mdl-tabs__panel" id="tabListCategory">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-						<div class="full-width panel mdl-shadow--2dp">
-							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de marcas
-							</div>
-							<div class="full-width panel-content">
-								<form action="#">
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMarca">
-											<i class="zmdi zmdi-search"></i>
-										</label>
-										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarMarca">
-											<label class="mdl-textfield__label"></label>
-										</div>
-									</div>
-								</form>
-								<div class="mdl-list">
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
-											<span>1. Marca name</span>
-											<span class="mdl-list__item-sub-title">Sub title</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-                                                                        
-                                                                        
-			
-                                                                        
-								</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
+                    
+
 		</div>
 	</section>
 </body>
