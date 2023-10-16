@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Estructura.ConexionBD"%>
+<%@page import="Estructura.ClienteAnadir" %>
+<%@page import="Estructura.NewServlet" %>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
@@ -13,7 +15,8 @@
 <html lang="es">
     <%
         ConexionBD c = new ConexionBD();
-        c.mostrar();
+        int num = c.contarFilas("clientes");
+        c.mostrarEmpleado();
         
         %>
 <head>
@@ -21,7 +24,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Clients</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -29,9 +32,47 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        
+ <script>
+     
+    function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No pendejo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  //  document.form.action = 'Estructura.AnadirCliente';
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                    window.location.href = 'client.jsp';
+                });
+            }
+        });
+    }
+    
+ 
+            //Una funcion de javascript para que el usuario confirme sus acciones.
+           /* function estasseguro()
+            {
+                var agree = confirm('Estas seguro que quieres añadir un nuevo usuario?');
+                if (agree)
+                    return document.form.action = "ClienteAnadir";
+                else
+                    return window.location.href = 'home.jsp';
+            }*/
+</script>
+       
+        
 </head>
 <body>
 	<!-- Notifications area -->
@@ -359,32 +400,36 @@
 								Nuevo Cliente
 							</div>
 							<div class="full-width panel-content">
-								<form>
+                                                            <form  name="form" onsubmit="return false" action="ClienteAnadir" method="POST")>
 									<h5 class="text-condensedLight">Información Personal</h5>
                                                                         <!--
 						
 									Utilizando queries se puede meter: Id_cliente, fecha_registro, y estado
                                                                         -->
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreCliente">
+										<input class="mdl-textfield__input" name="txt_nombrecliente" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreCliente">
 										<label class="mdl-textfield__label" for="NombreCliente">Nombre</label>
 										<span class="mdl-textfield__error">Nombre Inválido</span>
 									</div>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="email" id="emailCliente">
+										<input class="mdl-textfield__input" name="txt_email" type="email" id="emailCliente">
 										<label class="mdl-textfield__label" for="emailCliente">E-mail</label>
 										<span class="mdl-textfield__error">E-mail Inválido</span>
 									</div>
                         
                                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="NITCliente">
+										<input class="mdl-textfield__input" name="txt_nit" type="text" id="NITCliente">
 										<label class="mdl-textfield__label" for="NITCliente">NIT</label>
 										<span class="mdl-textfield__error">NIt Inválido</span>
                                                                                 </div>
-                                                                        
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" name="txt_telefono" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="TelefonoCliente">
+										<label class="mdl-textfield__label" for="TelefonoCliente">Telefono</label>
+										<span class="mdl-textfield__error">Telefono Inválido</span>
+                                                                        </div>
                 
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addClient">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addClient" onclick="verificar()">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
 										<div class="mdl-tooltip" for="btn-addClient">Añadir Cliente</div>
@@ -403,6 +448,21 @@
 								Lista de Clientes
 							</div>
 							<div class="full-width panel-content">
+                                                            <%
+                                                            if (num == 0 ){
+                                                            %>
+                                                            <div class="mdl-list">
+									<div class="mdl-list__item mdl-list__item--two-line">
+                                                                            
+										<span class="mdl-list__item-primary-content">
+                                                                                    <span>No existe usuarios.</span>
+									</div>
+                
+                                                            <%
+                                                                }else{
+                                                                %>
+                                                            
+                                                            <span class="mdl-typography--text-center">Existen <%=num  %> cliente(s).</span>
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCliente">
@@ -413,13 +473,16 @@
 											<label class="mdl-textfield__label"></label>
 										</div>
 									</div>
+                                                                    
 								</form>
     
                                                             <%
-                                                                while(c.rs.next()){
+                                                                
+                                                            while(c.rs.next()){
                                                             %>
 								<div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
+                                                                            
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
 											<span><%=c.rs.getString("nombre")%></span>
@@ -429,9 +492,11 @@
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     
-                                       }
+                                       }    }
 				%>
 								</div>
+                                                                
+                                                                
 							</div>
 						</div>
 						
