@@ -5,16 +5,24 @@
         <servlet-class>Estructura.ClienteAnadir</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>Estructura.NewServlet</servlet-class>
+        <servlet-name>AnadirCategoria</servlet-name>
+        <servlet-class>Estructura.AnadirCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirMarca</servlet-name>
+        <servlet-class>Estructura.AnadirMarca</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ClienteAnadir</servlet-name>
         <url-pattern>/ClienteAnadir</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
+        <servlet-name>AnadirCategoria</servlet-name>
+        <url-pattern>/AnadirCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirMarca</servlet-name>
+        <url-pattern>/AnadirMarca</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

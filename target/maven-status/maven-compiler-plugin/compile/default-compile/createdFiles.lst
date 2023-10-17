@@ -1,7 +1,10 @@
+Estructura\AnadirMarca.class
 Estructura\ConexionBD.class
 Model\ClienteModel.class
-Estructura\NewServlet.class
+Model\MarcaModel.class
+Model\CategoriaModel.class
 Estructura\ClienteAnadir.class
 Estructura\AnadirCliente.class
+Estructura\AnadirCategoria.class
 grupo2\proyectobd1\JakartaRestConfiguration.class
 grupo2\proyectobd1\resources\JakartaEE10Resource.class

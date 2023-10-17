@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="Estructura.ConexionBD"%>
 <%@page import="Estructura.ClienteAnadir" %>
-<%@page import="Estructura.NewServlet" %>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
@@ -16,7 +15,7 @@
     <%
         ConexionBD c = new ConexionBD();
         int num = c.contarFilas("clientes");
-        c.mostrarEmpleado();
+        c.mostrarCliente();
         
         %>
 <head>
@@ -38,6 +37,11 @@
         
  <script>
      
+     //Alerta SweetAlert2
+     /*
+      * Esta alerta es utilizado para que el usuario verifique si quiere hacer cambios.
+      * 
+      */
     function verificar() {
         Swal.fire({
             title: '¿Estás Seguro?',
@@ -60,16 +64,31 @@
         });
     }
     
- 
-            //Una funcion de javascript para que el usuario confirme sus acciones.
-           /* function estasseguro()
-            {
-                var agree = confirm('Estas seguro que quieres añadir un nuevo usuario?');
-                if (agree)
-                    return document.form.action = "ClienteAnadir";
-                else
-                    return window.location.href = 'home.jsp';
-            }*/
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCliente");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
 </script>
        
         
@@ -449,6 +468,12 @@
 							</div>
 							<div class="full-width panel-content">
                                                             <%
+                                                            /*
+                                                            ¿QUE SUCEDE AQUÍ?
+                                                            Esta condicion revisa cuantas filas hay en una tabla. Si no hay filas (num == 0), no hay usuarios.
+                                                            Si hay filas, entonces que muestre todos los usuarios.
+                                                            
+                                                            */
                                                             if (num == 0 ){
                                                             %>
                                                             <div class="mdl-list">
@@ -469,7 +494,7 @@
 											<i class="zmdi zmdi-search"></i>
 										</label>
 										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarCliente">
+                                                                                    <input class="mdl-textfield__input" type="text" id="BuscarCliente" onkeyup="filtrar()">
 											<label class="mdl-textfield__label"></label>
 										</div>
 									</div>
@@ -480,15 +505,15 @@
                                                                 
                                                             while(c.rs.next()){
                                                             %>
-								<div class="mdl-list">
-									<div class="mdl-list__item mdl-list__item--two-line">
+								<div class="mdl-list listFiltro">
+									<div class="mdl-list__item mdl-list__item--two-line Lista">
                                                                             
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
 											<span><%=c.rs.getString("nombre")%></span>
 											<span class="mdl-list__item-sub-title"><%=c.rs.getString("nit") %></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+										<a class="mdl-list__item-secondary-action" href="clientModificar.jsp"><i class="zmdi zmdi-more"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

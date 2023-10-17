@@ -48,7 +48,7 @@ public class ConexionBD {
            conectar().close();
        }
        
-       public void mostrarEmpleado() {
+       public void mostrarCliente() {
                try{
                    //Utilizamos la siguiente syntax para cualquier transaccion:
                    // usuario.tabla
@@ -100,7 +100,50 @@ public class ConexionBD {
     }
   }
   
+  
+  
+  //-----------------------------CATEGORIAS---------------------------------------
+  
+  public void mostrarCategorias(){
+      try{
+          ps = conectar().prepareStatement("Select * from adminproyecto.categorias");
+          rs = ps.executeQuery();
+  }catch (SQLException e){
+      System.err.println("SQLException: "+ e.getMessage());
+      e.printStackTrace();
+  }
+  
+}
+  public void anadirCategorias(String nombre, String descripcion) throws SQLException{
+      try{
+          ps = conectar().prepareStatement("{call insertar_categoria(?,?,'s')}");
+          ps.setString(1, nombre);
+          ps.setString(2, descripcion);
+          ps.executeUpdate();
+      }catch(SQLException e){
+         System.err.println("SQLException: " + e.getMessage());
+         e.printStackTrace();
+      }
+  }
+  
+  
+  
+ //-----------------------------MARCAS--------------------------------------------
+  public void mostrarMarcas(){
+      try{
+          ps = conectar().prepareStatement("Select * from adminproyecto.marcas");
+          rs = ps.executeQuery();
+      }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+  }
+  
+  public void anadirMarca(String nombre, String pais_origen) throws SQLException{
+      ps = conectar().prepareStatement("{call insertar_marca(?,?,'s')}");
+      ps.setString(1, nombre);
+      ps.setString(2, pais_origen);
+      ps.executeQuery();
+  }
 }
        
-
-

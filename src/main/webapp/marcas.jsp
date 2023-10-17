@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"  %>
+<%@page import="Estructura.AnadirMarca" %>
+
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
@@ -13,12 +16,18 @@
 -->
 <!DOCTYPE html>
 <html lang="es">
+    <%
+        ConexionBD c = new ConexionBD();
+        int num = c.contarFilas("marcas");
+        c.mostrarMarcas();
+        %>
+    
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Marcas</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -26,9 +35,60 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        <script>
+            function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No pendejo'
+        }).then((result) => {
+            //Esta parte se ejecuta al presionar si
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                //Esta parte se ejecuta al presionar no
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                    window.location.href = 'marca.jsp';
+                });
+            }
+        });
+    }
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCategoria");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+</script>
 </head>
 <body>
 	<!-- Notifications area -->
@@ -356,21 +416,21 @@
 								Nueva marca
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form name="form" onsubmit="return false" method="POST" action="AnadirMarca">
                                                                     <!--Utilizando queries, podemos meter: id_categorias, estado -->
 									<h5 class="text-condensedLight">Datos de la categoría</h5>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMarca">
-										<label class="mdl-textfield__label" for="NombreMarca">Nombre</label>
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMarca" name="txt_nombremarca">
+										<label class="mdl-textfield__label" for="NombreMarca" >Nombre</label>
 										<span class="mdl-textfield__error">Nombre Inválido</span>
 									</div>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="PaisMarca">
-										<label class="mdl-textfield__label" for="PaisMarca">País Origen</label>
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="PaisMarca" name="txt_paismarca">
+										<label class="mdl-textfield__label" for="PaisMarca" >País Origen</label>
 										<span class="mdl-textfield__error">País Inválido</span>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addCategory">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addCategory" onclick="verificar()">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
 										<div class="mdl-tooltip" for="btn-addCategory">Añadir marca</div>
@@ -389,6 +449,26 @@
 								Lista de marcas
 							</div>
 							<div class="full-width panel-content">
+                                                            
+                                                            <%
+                                                                if (num == 0){
+                                                                
+                                                                %>
+                                                            <div class="mdl-list">
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+                                                                                    <span>No existe categorias.</span>
+									</div>
+									<li class="full-width divider-menu-h"></li>
+                                                                   
+								</div>
+                                                            <% 
+                                                                } else{
+                                                            
+                                                            %>
+                                                            
+                                                <span class="mdl-typography--text-center" >Existen <%=num %> categoria(s).</span>
+
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMarca">
@@ -400,20 +480,25 @@
 										</div>
 									</div>
 								</form>
+                                                                <%
+                                                                    while(c.rs.next()){
+                                                                    %>
 								<div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
-											<span>1. Marca name</span>
-											<span class="mdl-list__item-sub-title">Sub title</span>
+                                                                                        <span><%=c.rs.getString("nombre")   %></span>
+                                                                                        <span class="mdl-list__item-sub-title"><%= c.rs.getString("pais_origen") %></span>
 										</span>
 										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                                                         
-                                                                        
-			
-                                                                        
+                                                                        <%
+                                                                            }
+
+                                                                                }
+                                                                        %>
 								</div>
 							</div>
 						</div>
