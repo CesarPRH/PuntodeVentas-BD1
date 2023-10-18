@@ -48,22 +48,29 @@ public class ConexionBD {
            conectar().close();
        }
        
-       public void mostrarCliente() {
-               try{
-                   //Utilizamos la siguiente syntax para cualquier transaccion:
-                   // usuario.tabla
-                   //SQL developer es raro :(
-      ps = conectar().prepareStatement("Select * from adminproyecto.clientes");
-      rs = ps.executeQuery();
-      //System.out.println("Hola mundo");
-       }catch (SQLException e) {
-       System.err.println("SQLException: " + e.getMessage());
-       e.printStackTrace();
-   }
-       }
+       
        //Metodo que consigue el numero de filas de una tabla. Usado para sacar un numerito.
   public int contarFilas(String nombreTabla) throws SQLException{
-     String consulta = "SELECT COUNT(*) FROM adminproyecto."+nombreTabla;
+     String consulta = "SELECT COUNT(*) FROM adminproyecto."+nombreTabla+" where estado='A'";
+     int numFilas;
+     try{
+         ps = conectar().prepareStatement(consulta);
+         rs = ps.executeQuery();
+         if(rs.next()){
+         return rs.getInt(1);}
+         else{
+             //Se utiliza -1 para demostrar que hay un error. Tomen esto en cuenta.
+             return -1;
+         }
+     }catch(SQLException e){
+         System.err.println("SQLException:" + e.getMessage());
+         return -1;
+     }
+     
+  }
+  
+  public int contarFilasDesactivados(String nombreTabla) throws SQLException{
+     String consulta = "SELECT COUNT(*) FROM adminproyecto."+nombreTabla+" where estado!='A'";
      int numFilas;
      try{
          ps = conectar().prepareStatement(consulta);
@@ -82,10 +89,35 @@ public class ConexionBD {
   }
   
   //---------------------CLIENTES-----------------------------------------
-  
+  public void mostrarCliente() {
+               try{
+                   //Utilizamos la siguiente syntax para cualquier transaccion:
+                   // usuario.tabla
+                   //SQL developer es raro :(
+      ps = conectar().prepareStatement("Select * from vista_clientes_activos");
+      rs = ps.executeQuery();
+      //System.out.println("Hola mundo");
+       }catch (SQLException e) {
+       System.err.println("SQLException: " + e.getMessage());
+       e.printStackTrace();
+   }
+       }
+  public void mostrarClienteDesactivado() {
+               try{
+                   //Utilizamos la siguiente syntax para cualquier transaccion:
+                   // usuario.tabla
+                   //SQL developer es raro :(
+      ps = conectar().prepareStatement("Select * from adminproyecto.clientes where estado!='A'");
+      rs = ps.executeQuery();
+      //System.out.println("Hola mundo");
+       }catch (SQLException e) {
+       System.err.println("SQLException: " + e.getMessage());
+       e.printStackTrace();
+   }
+       }
   public void anadirCliente(String nombre, String email, String nit, int numTelefono) throws SQLException{
       try{
-      ps=conectar().prepareStatement("{call insertar_cliente(?,?,?,?,SYSDATE,'s')}");
+      ps=conectar().prepareStatement("{call insertar_cliente(?,?,?,?,SYSDATE,'A')}");
       ps.setString(1, nombre);
       ps.setString(2,email);
       ps.setString(3, nit);
@@ -100,7 +132,39 @@ public class ConexionBD {
     }
   }
   
+  public void conseguirInfoCliente(String id){
+      try{
+          ps = conectar().prepareStatement("Select * from adminproyecto.clientes where id_clientes="+id);
+          rs = ps.executeQuery();
+          
+      }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+  }
   
+  public void actualizarCliente(int id_clientes, String nombre, String email, String nit, int numTelefono) throws SQLException{
+      ps=conectar().prepareStatement("{call actualizar_cliente(?,?,?,?,?,SYSDATE,'A')}");
+      //ps=conectar().prepareStatement("Update clientes set nombre=?, email=?, nit=?, telefono=? where id_clientes=? ");
+      ps.setInt(1, id_clientes);
+      ps.setString(2, nombre);
+      ps.setString(3, email);
+      ps.setString(4, nit);
+      ps.setInt(5, numTelefono);
+      
+      ps.executeUpdate();
+  }
+  
+  public void eliminarCliente(int id_clientes)throws SQLException{
+      ps = conectar().prepareStatement("{call eliminar_cliente(?,'s')}");
+      ps.setInt(1, id_clientes);
+      ps.executeUpdate();
+  }
+  
+  public void recuperarCliente(int id_clientes) throws SQLException{
+      ps = conectar().prepareStatement("Update adminproyecto.clientes set estado = 'A' Where id_clientes="+id_clientes);
+      ps.executeUpdate();
+  }
   
   //-----------------------------CATEGORIAS---------------------------------------
   

@@ -12,6 +12,22 @@
         <servlet-name>AnadirMarca</servlet-name>
         <servlet-class>Estructura.AnadirMarca</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetSessionServlet</servlet-name>
+        <servlet-class>Sesiones.SetSessionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarCliente</servlet-name>
+        <servlet-class>Estructura.ActualizarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarCliente</servlet-name>
+        <servlet-class>Estructura.EliminarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RecuperarCliente</servlet-name>
+        <servlet-class>Estructura.RecuperarCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ClienteAnadir</servlet-name>
         <url-pattern>/ClienteAnadir</url-pattern>
@@ -23,6 +39,22 @@
     <servlet-mapping>
         <servlet-name>AnadirMarca</servlet-name>
         <url-pattern>/AnadirMarca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetSessionServlet</servlet-name>
+        <url-pattern>/SetSessionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarCliente</servlet-name>
+        <url-pattern>/ActualizarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarCliente</servlet-name>
+        <url-pattern>/EliminarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecuperarCliente</servlet-name>
+        <url-pattern>/RecuperarCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
