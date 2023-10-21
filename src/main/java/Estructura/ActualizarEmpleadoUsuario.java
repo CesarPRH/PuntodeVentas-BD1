@@ -61,7 +61,7 @@ public class ActualizarEmpleadoUsuario extends HttpServlet {
                 System.out.println("Id del usuario: "+i_idUsuario);
             }catch(SQLException ex){
                 out.println("<html> <body>");
-                out.println("<h1>Error Occurred while adding category</h1>");
+                out.println("<h1>Error Occurred while looking for the usuario id:</h1>");
                 out.println("<p>" + ex.getMessage() + "</p>");
                 out.println("</body></html>");
             }
