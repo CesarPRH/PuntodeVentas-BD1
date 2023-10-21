@@ -87,6 +87,8 @@ public class SetSessionServlet extends HttpServlet {
             session.setAttribute("id", id);
         }
        System.out.println("El nit en el servidor de la persona es: "+nit);
+       System.out.println("El nombre en el servidor de la persona es: "+nombre);
+       System.out.println("El id en el servidor de la persona es: "+id);
        
    
     }

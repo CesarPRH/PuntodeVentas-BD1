@@ -50,7 +50,7 @@
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Sí',
-            cancelButtonText: 'No pendejo'
+            cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
@@ -59,7 +59,7 @@
                 });
             } else if (result.isDismissed) {
                 Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
-                    window.location.href = 'client.jsp';
+                  // window.location.href = 'client.jsp';
                 });
             }
         });

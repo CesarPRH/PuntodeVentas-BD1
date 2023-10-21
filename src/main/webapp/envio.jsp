@@ -15,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Payments</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -23,9 +23,76 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+       <script>
+            function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No pendejo'
+        }).then((result) => {
+            //Esta parte se ejecuta al presionar si
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                //Esta parte se ejecuta al presionar no
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                    window.location.href = 'marca.jsp';
+                });
+            }
+        });
+    }
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCategoria");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
+</script> 
 </head>
 <body>
 	<!-- Notifications area -->
@@ -335,7 +402,7 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Métodos de pago que los clientes podrán utilizar para pagar.
+					Métodos de pago que los clientes podrán utilizar para pagar. Hola mudno
 				</p>
 			</div>
 		</section>
@@ -391,47 +458,64 @@
 								Lista de Métodos de Envío
 							</div>
 							<div class="full-width panel-content">
+                                                            
+                                                            <%
+                                                                if (num == 0){
+                                                                
+                                                                %>
+                                                            <div class="mdl-list">
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+                                                                                    <span>No existe categorias.</span>
+									</div>
+									<li class="full-width divider-menu-h"></li>
+                                                                   
+								</div>
+                                                            <% 
+                                                                } else{
+                                                            
+                                                            %>
+                                                            
+                                                <span class="mdl-typography--text-center" >Existen <%=num %> categoria(s).</span>
+                                                <a style="text-decoration:none; color:black" href="MarcasDesactivadas.jsp">
+                                                            <button class="btn-subMenu" formaction="clientDesactivados.jsp">
+                                                                <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
+                                                            </button>
+                                                            <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
+								</a>
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMetodo">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMarca">
 											<i class="zmdi zmdi-search"></i>
 										</label>
 										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarMetodo">
+											<input class="mdl-textfield__input" type="text" id="BuscarMarca">
 											<label class="mdl-textfield__label"></label>
 										</div>
 									</div>
 								</form>
+                                                                <%
+                                                                    while(c.rs.next()){
+                                                                    %>
 								<div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
-											<span>1. Payment method</span>
-											<span class="mdl-list__item-sub-title">Sub tittle</span>
+											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
+                                                                                        <span><%=c.rs.getString("nombre")   %></span>
+                                                                                        <span class="mdl-list__item-sub-title"><%= c.rs.getString("pais_origen") %></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+										<a class="mdl-list__item-secondary-action" href="MarcaModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_marcas")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
-                                                                        <!<!--   
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
-											<span>2. Payment method</span>
-											<span class="mdl-list__item-sub-title">Sub tittle</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-card mdl-list__item-avatar"></i>
-											<span>3. Payment method</span>
-											<span class="mdl-list__item-sub-title">Sub tittle</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-                                                                        comment -->
+                                                                        
+                                                                        <%
+                                                                            }
+
+                                                                                }
+                                                                        %>
 								</div>
+							</div>
+                                                            
 							</div>
 						</div>
 					</div>

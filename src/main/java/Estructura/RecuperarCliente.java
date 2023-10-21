@@ -36,7 +36,12 @@ public class RecuperarCliente extends HttpServlet {
             
             String s_id = request.getParameter("txt_id");
             int i_id = Integer.parseInt(s_id);
-            
+            out.println("<html> <body>");
+                out.println("<h1>I like watching videos of black men shaking their booties</h1>");
+
+                
+                out.println("</body></html>");
+            /*
             if (s_id!= null){
                 try{
                     c.recuperarCliente(i_id);
@@ -48,7 +53,7 @@ public class RecuperarCliente extends HttpServlet {
                 out.println("<p>"+ex.getStackTrace()+"</p>");
                 out.println("</body></html>");
                 }
-            }
+            }*/
             
         }
     }

@@ -52,7 +52,7 @@
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Sí',
-            cancelButtonText: 'No pendejo'
+            cancelButtonText: 'No'
         }).then((result) => {
             //Esta parte se ejecuta al presionar si
             if (result.isConfirmed) {
@@ -63,7 +63,7 @@
             } else if (result.isDismissed) {
                 //Esta parte se ejecuta al presionar no
                 Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
-                    window.location.href = 'categories.jsp';
+                   // window.location.href = 'categories.jsp';
                 });
             }
         });
@@ -93,6 +93,22 @@
     //b.style.display = "none";
     }
   }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
 }
 </script>
 </head>
@@ -472,7 +488,13 @@
                                                             <%} else { %>
                                                             
                                                             <span class="mdl-typography--text-center" >Existen <%=num %> categoria(s).</span>
-								<form action="#">
+							<a style="text-decoration:none; color:black" href="CategoriasDesactivados.jsp">
+                                                            <button class="btn-subMenu" formaction="clientDesactivados.jsp">
+                                                                <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
+                                                            </button>
+                                                            <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
+								</a>	
+                                                            <form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCategoria">
 											<i class="zmdi zmdi-search"></i>
@@ -493,7 +515,7 @@
                                                                                         <span><%=c.rs.getString("nombre") %></span>
                                                                                         <span class="mdl-list__item-sub-title"><%=c.rs.getString("descripcion")  %></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action" href="categorieModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_categorias")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                                                         

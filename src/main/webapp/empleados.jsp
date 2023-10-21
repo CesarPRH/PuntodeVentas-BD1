@@ -5,17 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"%>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
 <!DOCTYPE html>
 <html lang="es">
+    <%
+        ConexionBD c = new ConexionBD();
+        int num = c.contarFilas("empleados");
+        c.MostrarUsuarioEmpleado();
+        %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Empleados</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -23,9 +29,80 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        <script>
+     
+     //Alerta SweetAlert2
+     /*
+      * Esta alerta es utilizado para que el usuario verifique si quiere hacer cambios.
+      * 
+      */
+    function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  //  document.form.action = 'Estructura.AnadirCliente';
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                   // window.location.href = 'client.jsp';
+                });
+            }
+        });
+    }
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCliente");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
+</script>
 </head>
 <body>
 	<!-- Notifications area -->
@@ -354,45 +431,50 @@
 								Nuevo empleado
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form name="form" onsubmit="return false" action="AnadirEmpleadoUsuario">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
                     <!-- Datos personales del empleado -->
                                                                                         <h5 class="text-condensedLight">Datos Personales</h5>
                                                                                         <!-- Nombre-->
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreEmpleado">
+												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreEmpleado" name="txt_nombreEmpleado">
 												<label class="mdl-textfield__label" for="NombreEmpleado">Nombre</label>
 												<span class="mdl-textfield__error">Nombre Inválido</span>
 											</div>
                                                                                         <!-- Apellido -->
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="ApellidoEmpleado">
+												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="ApellidoEmpleado" name="txt_apellidoEmpleado">
 												<label class="mdl-textfield__label" for="ApellidoEmpleado">Apellido</label>
 												<span class="mdl-textfield__error">Nombre Inválido</span>
 											</div>
                                                                                         <!-- DPI -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DPIEmpleado">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DPIEmpleado" name="txt_DPIEmpleado">
 												<label class="mdl-textfield__label" for="DPIEmpleado">DPI</label>
 												<span class="mdl-textfield__error">DPI Inválio</span>
 											</div>
                                                                                         <!-- Numero Telefonico-->    
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="NumTelEmpleado">
+												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="NumTelEmpleado" name="txt_telefonoEmpleado">
 												<label class="mdl-textfield__label" for="NumTelEmpleado">Número Telefónico</label>
 												<span class="mdl-textfield__error">Número Telefónico Inválido</span>
 											</div>
                                                                                         <!-- Direccion -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="DireccionEmpleado">
+												<input class="mdl-textfield__input" type="text" id="DireccionEmpleado" name="txt_direccionEmpleado">
 												<label class="mdl-textfield__label" for="DireccionEmpleado">Dirección</label>
 												<span class="mdl-textfield__error">Dirección Inválido</span>
 											</div>
-                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="PuestoEmpleado">
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
+												<input class="mdl-textfield__input" type="text" id="PuestoEmpleado" name="txt_puestoEmpleado">
 												<label class="mdl-textfield__label" for="PuestoEmpleado">Puesto</label>
 												<span class="mdl-textfield__error">Puesto Inválido</span>
+											</div>
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
+												<input class="mdl-textfield__input" type="date" id="FechaContratacion" name="txt_fechaContratacion">
+												<label class="mdl-textfield__label" for="FechaContratacion">Fecha de Contratacion</label>
+												<span class="mdl-textfield__error">Fecha Inválida</span>
 											</div>
 										</div>
                     <!-- Información de la cuenta del empleado -->
@@ -401,44 +483,21 @@
                                                                                         <!-- Esta info se utilizara en la tabla de usuarios -->
                                                                                         <!-- Usuario -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameEmpleado">
+												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameEmpleado" name="txt_usuario">
 												<label class="mdl-textfield__label" for="UserNameEmpleado">Nombre de Usuario</label>
 												<span class="mdl-textfield__error">Nombre de Usuario Inválido</span>
 											</div>
                                                                                         <!-- Contraseña -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="password" id="ContrasenaAdmin">
+												<input class="mdl-textfield__input" type="password" id="ContrasenaAdmin" name="txt_contraseña">
 												<label class="mdl-textfield__label" for="ContrasenaAdmin">Contraseña</label>
 												<span class="mdl-textfield__error">Contraseña Inválida</span>
 											</div>
-											<h5 class="text-condensedLight">Elige tu Avatar</h5>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-												<input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
-												<img src="assets/img/avatar-male.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 1</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-												<input type="radio" id="option-2" class="mdl-radio__button" name="options" value="avatar-female.png">
-												<img src="assets/img/avatar-female.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 2</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-												<input type="radio" id="option-3" class="mdl-radio__button" name="options" value="avatar-male2.png">
-												<img src="assets/img/avatar-male2.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 3</span>
-											</label>
-											<br><br>
-											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
-												<input type="radio" id="option-4" class="mdl-radio__button" name="options" value="avatar-female2.png">
-												<img src="assets/img/avatar-female2.png" alt="avatar" style="height: 45px; width:"45px;" ">
-												<span class="mdl-radio__label">Avatar 4</span>
-											</label>
+											
 										</div>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin" onclick="verificar()">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
 										<div class="mdl-tooltip" for="btn-addAdmin">Añadir Administrador</div>
@@ -458,35 +517,73 @@
 								Consultar Empleados
 							</div>
 							<div class="full-width panel-content">
-								<form action="#">
+                                                            <%
+                                                            /*
+                                                            ¿QUE SUCEDE AQUÍ?
+                                                            Esta condicion revisa cuantas filas hay en una tabla. Si no hay filas (num == 0), no hay usuarios.
+                                                            Si hay filas, entonces que muestre todos los usuarios.
+                                                            
+                                                            */
+                                                            if (num == 0 ){
+                                                            %>
+                                                            <div class="mdl-list">
+									<div class="mdl-list__item mdl-list__item--two-line">
+                                                                            
+										<span class="mdl-list__item-primary-content">
+                                                                                    <span>No existe Empleados.</span>
+									</div>
+                
+                                                            <%
+                                                                }else{
+                                                                %>
+                                                            
+                                                            <span class="mdl-typography--text-center">Existen <%=num  %> empleado(s).</span>
+                                                            
+                                                            <a style="text-decoration:none; color:black" href="EmpleadosDesactivados.jsp">
+                                                            <button class="btn-subMenu" formaction="clientDesactivados.jsp">
+                                                                <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
+                                                            </button>
+                                                            <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
+								</a>
+                                                            <form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarAdmin">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCliente">
 											<i class="zmdi zmdi-search"></i>
 										</label>
 										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarAdmin">
+                                                                                    
+                                                                                    <input class="mdl-textfield__input" type="text" id="BuscarCliente" onkeyup="filtrar()">
 											<label class="mdl-textfield__label"></label>
-										</div>
+										
+                                                                                </div>
 									</div>
-								</form>
-								<div class="mdl-list">
-                                                                    <!--OPCION: Crear nuevo HTML demostrando la información completa del administrador
-                                                                                O, ampliar la lista con los detalles del los administradores-->
                                                                     
-                                                                    <!-- TODO: Añadir un bucle para que repita cada div -->
-									<div class="mdl-list__item mdl-list__item--two-line">
+								</form>
+    
+                                                            <%
+                                                                
+                                                            while(c.rs.next()){
+                                                            %>
+								<div class="mdl-list listFiltro">
+									<div class="mdl-list__item mdl-list__item--two-line Lista">
+                                                                            
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>1. Nombre de Administrador</span>
-											<span class="mdl-list__item-sub-title">DPI</span>
+                                                                                        <span><%=c.rs.getString("nombre_empleado")%> <%=c.rs.getString("apellido_empleado")  %> | Cuenta: <%=c.rs.getString("usuario") %></span>
+                                                                                        <span class="mdl-list__item-sub-title">Tipo de usuario: <%=c.rs.getString("tipo_usuario")  %> | Telefono: <%=c.rs.getString("telefono_empleado") %> | Puesto: <%=c.rs.getString("puesto_empleado")  %></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action" href="EmpleadosModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_empleado")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
-                                                                        
-									
+                                   <%                                     
+                                       }    }
+				%>
 								</div>
+                                                                
+                                                                
 							</div>
+						</div>
+                                                    
 						</div>
 					</div>
 				</div>

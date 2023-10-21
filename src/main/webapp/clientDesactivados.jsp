@@ -49,7 +49,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire('¡Perfecto!', 'El cliente fue actualizado con éxito.', 'success').then(() => {
-                   document.form.action = 'ActualizarCliente';
+                   document.form.action = 'RecuperarCliente';
                     document.form.submit();
                 });
             } else if (result.isDismissed) {
@@ -59,28 +59,7 @@
             }
         });
     }
-    function verificarBorrar(){
-        Swal.fire({
-            title: '¿Estás Seguro?',
-            text: 'Estás a punto de BORRAR a un cliente. ¿Estas seguro de tus acciones?',
-            icon: 'warning',
-            showCancelButton: true,
-            background: '#A9A9A9',
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire('¡Perfecto!', 'El cliente fue actualizado con éxito.', 'success').then(() => {
-                    document.form.action = 'EliminarCliente';
-                    document.form.submit();
-                });
-            } else if (result.isDismissed) {
-                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
-                   // window.location.href = 'client.jsp';
-                });
-            }
-        });
-    }
+   
       </script>  
     </head>
     <body>
@@ -89,7 +68,7 @@
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de Clientes
+								Lista de Clientes Desactivados
 							</div>
 							<div class="full-width panel-content">
                                                             <%
@@ -105,7 +84,7 @@
 									<div class="mdl-list__item mdl-list__item--two-line">
                                                                             
 										<span class="mdl-list__item-primary-content">
-                                                                                    <span>No existe usuarios.</span>
+                                                                                    <span>No existe clientes.</span>
 									</div>
                 
                                                             <%
@@ -129,7 +108,7 @@
 									</div>
                                                                     
 								</form>
-    
+                                                            <form name="form" onsubmit="return false" action="RecuperarCliente">
                                                             <%
                                                                 
                                                             while(c.rs.next()){
@@ -142,14 +121,14 @@
 											<span><%=c.rs.getString("nombre")%></span>
 											<span class="mdl-list__item-sub-title">ID:<%=c.rs.getInt("id_clientes")  %> || <%=c.rs.getString("nit") %></span>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action" href="clientModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_clientes")%>')"><i class="zmdi zmdi-more"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar()" style="color:black"><i class="zmdi zmdi-archive"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     
                                        }    }
 				%>
 								</div>
-                                                                
+                                                                </form>
                                                                 
 							</div>
 						</div>

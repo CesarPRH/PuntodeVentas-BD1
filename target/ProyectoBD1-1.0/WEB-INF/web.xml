@@ -28,6 +28,50 @@
         <servlet-name>RecuperarCliente</servlet-name>
         <servlet-class>Estructura.RecuperarCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActualizarCategoria</servlet-name>
+        <servlet-class>Estructura.ActualizarCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <servlet-class>Estructura.EliminarCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarMarca</servlet-name>
+        <servlet-class>Estructura.ActualizarMarca</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarMarca</servlet-name>
+        <servlet-class>Estructura.EliminarMarca</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirProveedor</servlet-name>
+        <servlet-class>Estructura.AnadirProveedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarProveedores</servlet-name>
+        <servlet-class>Estructura.ActualizarProveedores</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarProveedor</servlet-name>
+        <servlet-class>Estructura.EliminarProveedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirEmpleadoUsuario</servlet-name>
+        <servlet-class>Estructura.AnadirEmpleadoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <servlet-class>Estructura.AnadirUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarEmpleadoUsuario</servlet-name>
+        <servlet-class>Estructura.ActualizarEmpleadoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DesactivarEmpleadoUsuario</servlet-name>
+        <servlet-class>Estructura.DesactivarEmpleadoUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ClienteAnadir</servlet-name>
         <url-pattern>/ClienteAnadir</url-pattern>
@@ -55,6 +99,50 @@
     <servlet-mapping>
         <servlet-name>RecuperarCliente</servlet-name>
         <url-pattern>/RecuperarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarCategoria</servlet-name>
+        <url-pattern>/ActualizarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <url-pattern>/EliminarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarMarca</servlet-name>
+        <url-pattern>/ActualizarMarca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarMarca</servlet-name>
+        <url-pattern>/EliminarMarca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirProveedor</servlet-name>
+        <url-pattern>/AnadirProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarProveedores</servlet-name>
+        <url-pattern>/ActualizarProveedores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarProveedor</servlet-name>
+        <url-pattern>/EliminarProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirEmpleadoUsuario</servlet-name>
+        <url-pattern>/AnadirEmpleadoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <url-pattern>/AnadirUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarEmpleadoUsuario</servlet-name>
+        <url-pattern>/ActualizarEmpleadoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DesactivarEmpleadoUsuario</servlet-name>
+        <url-pattern>/DesactivarEmpleadoUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
