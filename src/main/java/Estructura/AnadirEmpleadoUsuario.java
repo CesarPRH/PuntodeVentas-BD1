@@ -51,6 +51,7 @@ public class AnadirEmpleadoUsuario extends HttpServlet {
             String s_fechaContratacion =request.getParameter("txt_fechaContratacion");
             String s_usuario = request.getParameter("txt_usuario");
             String s_contraseña = request.getParameter("txt_contraseña");
+            String redirected = "Empleado";
             System.out.println(s_nombre+" "+s_apellido+" "+s_dpi+" "+s_telefono+" "+s_direccion+" ");
             System.out.println(s_puesto+" "+s_fechaContratacion+" "+s_usuario+" "+s_contraseña+" ");
             
@@ -66,6 +67,7 @@ public class AnadirEmpleadoUsuario extends HttpServlet {
                     request.setAttribute("s_usuario", s_usuario);
                     request.setAttribute("s_contraseña", s_contraseña);
                     request.setAttribute("s_dpi", s_dpi);
+                    request.setAttribute("redirected",redirected);
                     
                     
                     c.AnadirEmpleado(s_nombre, s_apellido, s_dpi, s_telefono, s_direccion, s_puesto, sqlDate);

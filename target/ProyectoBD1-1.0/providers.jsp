@@ -523,17 +523,17 @@ function SetSession(link, id){
     
                                                             <%
                                                                 
-                                                            while(c.rs.next()){
+                                                            while(c.rsAux2.next()){
                                                             %>
 								<div class="mdl-list listFiltro">
 									<div class="mdl-list__item mdl-list__item--two-line Lista">
                                                                             
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span><%=c.rs.getString("nombre_empresa")%></span>
-											<span class="mdl-list__item-sub-title">ID:<%=c.rs.getInt("id_proveedores")  %> || <%=c.rs.getString("contacto_nombre") %></span>
+											<span><%=c.rsAux2.getString("nombre_empresa")%></span>
+											<span class="mdl-list__item-sub-title">ID:<%=c.rsAux2.getInt("id_proveedores")  %> || <%=c.rsAux2.getString("contacto_nombre") %></span>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action" href="ProveedoresModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_proveedores")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action" href="ProveedoresModificar.jsp" onclick="SetSession(this, '<%=c.rsAux2.getString("id_proveedores")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

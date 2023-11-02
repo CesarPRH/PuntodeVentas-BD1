@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"  %>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
@@ -14,12 +15,20 @@
 -->
 <!DOCTYPE html>
 <html lang="es">
+    
+    <%
+        //Esto fue un dolor de cabeza :(
+        ConexionBD c = new ConexionBD();
+        
+        //Esta utilizara rsAux
+       
+        %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Products</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -27,7 +36,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
 </head>
@@ -43,6 +52,77 @@ $(document).ready(function(){
         }
     });
 });
+</script>
+<script>
+     
+     //Alerta SweetAlert2
+     /*
+      * Esta alerta es utilizado para que el usuario verifique si quiere hacer cambios.
+      * 
+      */
+    function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  //  document.form.action = 'Estructura.AnadirCliente';
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                   // window.location.href = 'client.jsp';
+                });
+            }
+        });
+    }
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCliente");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
 </script>
 	<!-- Notifications area -->
 	<section class="full-width container-notifications">
@@ -386,37 +466,56 @@ $(document).ready(function(){
 								Nuevo producto
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form name="form" onsubmit="return false" action="AnadirProducto">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Información Básica</h5>
 											
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreProducto">
+												<input class="mdl-textfield__input" type="text"  id="NombreProducto" name="txt_nombreProducto">
 												<label class="mdl-textfield__label" for="NombreProducto">Name</label>
 												<span class="mdl-textfield__error">Nombre Inválido</span>
 											</div>
+                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												<input class="mdl-textfield__input" type="text"  id="DescripcionProducto" name="txt_descripcionProducto">
+												<label class="mdl-textfield__label" for="DescripcionProducto">Descripción</label>
+												<span class="mdl-textfield__error">Descripción Inválida</span>
+											</div>
 											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
+												<select class="mdl-textfield__input" name="txt_categoria">
 													<option value="" disabled="" selected="">Selecciona categoría</option>
                                                                     <!-- Aquí se va a utilizar un ciclo para mostrar todas las categorías -->
-													<option value="">Category 1</option>
-													<option value="">Category 2</option>
+                                                                    <%
+                                                                        //Esta utilizar rs
+                                                                          c.mostrarCategorias();
+                                                                        while(c.rs.next()){
+                                                                        %>
+                                                                        <option value="<%= c.rs.getInt("id_categorias") %>"><%= c.rs.getString("nombre") %></option>
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
 												</select>
 											</div>
                                                                                         <div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
+												<select class="mdl-textfield__input"name="txt_marca">
 													<option value="" disabled="" selected="">Selecciona Marca</option>
-                                                                    <!-- Aquí se va a utilizar un ciclo para mostrar todas las categorías -->
-													<option value="">Marca 1</option>
-													<option value="">Marca 2</option>
+                                                                    <!-- Aquí se va a utilizar un ciclo para mostrar todas las marcas -->
+                                                                    <%
+                                                                        //Esta utiliza rsAux
+                                                                        c.mostrarMarcas();
+                                                                        while(c.rsAux.next()){
+                                                                        %>
+                                                                        <option value="<%= c.rsAux.getInt("id_marcas")  %>"><%= c.rsAux.getString("nombre")  %></option>
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
 												</select>
 											</div>
 											
 											
                                                                                                                                                         
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto">
+												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto" name="txt_precio">
 												<label class="mdl-textfield__label" for="PrecioProducto">Precio</label>
 												<span class="mdl-textfield__error">Precio Inválido</span>
 											</div>
@@ -428,39 +527,45 @@ $(document).ready(function(){
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Proveedor</h5>
 											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
+												<select class="mdl-textfield__input" name="txt_proveedor">
 													<option value="" disabled="" selected="">Selecciona proveedor</option>
                                                                     <!-- Igual que la categoría y marca -->
-                                                                                                        <option value="">Proveedor 1</option>
-													<option value="">Proveedor 2</option>
+                                                                    <%
+                                                                        c.mostrarProveedores();
+                                                                        while(c.rsAux2.next()){
+                                                                        %>
+                                                                                                        <option value="<%=c.rsAux2.getInt("Id_proveedores")%>"><%=c.rsAux2.getString("nombre_empresa")%></option>
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
 												</select>
 											</div>
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="StockProducto">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="StockProducto" name="txt_stock">
 												<label class="mdl-textfield__label" for="StockProducto"> Stock disponible</label>
 												<span class="mdl-textfield__error">Stock Inválido</span>
 											</div>         
-                                                                                        <div><input type="checkbox" id="toggle" >       Promoción   </div>
+                                                                                        <div><input type="checkbox" id="toggle" name="txt_promocion" value="si">       Promoción   </div>
                                                                                         
                                                                                         
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
-												<input class="mdl-textfield__input disable" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DescuentoProducto" disabled >
+												<input class="mdl-textfield__input disable" type="number" id="DescuentoProducto" disabled  name="txt_promocionDescuento">
 												<label class="mdl-textfield__label" for="DescuentoProducto">% Descuento</label>
 												<span class="mdl-textfield__error">Descuento Inválido</span>
 											</div>	
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " disabled="true">
-												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreDescuento" disabled>
+												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreDescuento" disabled name="txt_promocionNombre">
 												<label class="mdl-textfield__label" for="NombreDescuento">Nombre de la promoción</label>
 												<span class="mdl-textfield__error">Nombre Inválido</span>
 											</div>	
                          
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " disabled="true">
-												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="DescripcionProducto" disabled>
+												<input class="mdl-textfield__input disable" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="DescripcionProducto" disabled name="txt_promocionDescripcion">
 												<label class="mdl-textfield__label" for="DescripcionProducto">Descripcion</label>
 												<span class="mdl-textfield__error">Descripcion inválida</span>
 											</div>	
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" disabled="true">
-												<input class="mdl-textfield__input disable" type="date" pattern="-?[0-9]*(\.[0-9]+)?" id="FechaFinalDescuento" disabled=>
+												<input class="mdl-textfield__input disable" type="date" pattern="-?[0-9]*(\.[0-9]+)?" id="FechaFinalDescuento" disabled name="txt_promocionFecha">
 												<label class="mdl-textfield__label" for="FechaFinalDescuento">Fecha Final</label>
 												<span class="mdl-textfield__error">Fecha inválida</span>
 											</div>	
@@ -469,7 +574,7 @@ $(document).ready(function(){
 										</div>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct" onclick="verificar()">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
 										<div class="mdl-tooltip" for="btn-addProduct">Añadir producto</div>

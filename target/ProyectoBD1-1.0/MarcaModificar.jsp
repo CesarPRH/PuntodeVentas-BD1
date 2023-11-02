@@ -134,8 +134,8 @@ function verificarBorrar(){
                                                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-danger" id="btn-deleteCategoria" onclick="verificarBorrar()" formaction="EliminarMarca">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <div class="mdl-tooltip" for="btn-addCategory">Añadir categoría</div>
-                                                        <div class="mdl-tooltip" for="btn-deleteCategoria">Desactivar Cliente</div>
+                                                        <div class="mdl-tooltip" for="btn-addCategory">Añadir Marca</div>
+                                                        <div class="mdl-tooltip" for="btn-deleteCategoria">Desactivar Marca</div>
 
                                                 </p>
                                         </form>

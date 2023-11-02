@@ -341,8 +341,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						2<br>
-						<small>Administradores</small>
+						Administradores
 					</span>
 				</div>
 				<i class="zmdi zmdi-account tile-icon"></i>
@@ -352,8 +351,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						71<br>
-						<small>Clientes</small>
+						Clientes
 					</span>
 				</div>
 				<i class="zmdi zmdi-accounts tile-icon"></i>
@@ -363,8 +361,7 @@
                         <article class="full-width tile">
                             <div class="tile-text">
                                 <span class="text-condensedLight">
-                                    Prueba<br>
-                                    <small>Empleados</small>
+                                    Empleados
                                 </span>
                             </div>
                             <i class="zmdi zmdi-account-box-mail tile-icon"></i>
@@ -374,8 +371,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						7<br>
-						<small>Proveedores</small>
+						Proveedores
 					</span>
 				</div>
 				<i class="zmdi zmdi-truck tile-icon"></i>
@@ -385,8 +381,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						9<br>
-						<small>Categorias</small>
+						Categorias
 					</span>
 				</div>
 				<i class="zmdi zmdi-label tile-icon"></i>
@@ -397,8 +392,7 @@
                         <article class="full-width tile">
                             <div class="tile-text">
                                 <span class="text-condensedLight">
-                                    Holamundo<br>
-                                    <small>Marcas</small>
+                                   Marcas
                                 </span>
                             </div>
                             <i class="zmdi zmdi-tag tile-icon"></i>
@@ -408,11 +402,10 @@
                             <article class="full-width tile">
                                 <div class="tile-text">
                                     <span class="text-condensedLight">
-                                        a<br>
-                                        <small>Métodos de Envío</small>
+                                       Métodos de Envío
                                     </span>
                                 </div>
-                                <i class="zmdi zmdi-bus tile-icon"></i>
+                                <i class="zmdi zmdi-truck tile-icon"></i>
                             </article>
                         </a>
                         <h2>Productos y Ventas</h2>
@@ -420,8 +413,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						121<br>
-						<small>Productos</small>
+						Productos
 					</span>
 				</div>
 				<i class="zmdi zmdi-washing-machine tile-icon"></i>
@@ -441,7 +433,7 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						47<br>
+						<br>
 						<small>ventas</small>
 					</span>
 				</div>
@@ -452,12 +444,21 @@
                         <article class="full-width tile">
                             <div class="tile-text">
                                 <span class="text-condensedLight">
-                                    Hola<br>
-                                    <small>Órdenes</small>
+                                    Órdenes
                             </div>
                             <i class="zmdi zmdi-shopping-cart-plus tile-icon"></i>
                         </article>
                             </a>
+                        <a href="promociones.jsp">
+                            <article class="full-width tile">
+                                <div class="tile-text">
+                                    <span class="text-condensedLight">
+                                       Promociones
+                                    </span>
+                                </div>
+                                <i class="zmdi zmdi-parking tile-icon"></i>
+                            </article>
+                        </a>
                         <!-- comment 
                             <a>
                                 <article class="full-width tile">

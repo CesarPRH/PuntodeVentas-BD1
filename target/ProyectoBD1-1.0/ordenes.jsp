@@ -28,7 +28,7 @@ NO SE HA TERMINADO
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ordenes</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -36,9 +36,60 @@ NO SE HA TERMINADO
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        <script>
+     
+     //Alerta SweetAlert2
+     /*
+      * Esta alerta es utilizado para que el usuario verifique si quiere hacer cambios.
+      * 
+      */
+ 
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCliente");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
+</script>
 </head>
 <body>
 	<!-- Notifications area -->
@@ -384,72 +435,41 @@ NO SE HA TERMINADO
 								Nuevo órden
 							</div><!--Hola Mundo-->
 							<div class="full-width panel-content">
-								<form>
+								<form name="form" action="ConfirmarOrden">
 									<div class="mdl-grid">
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+										<div>
 											<h5 class="text-condensedLight">Información Básica del órden</h5>
                                                                                         <!-- Id_cliente, pertenece a tabla ordenes -->
-                                                                                        <!-- Busquedas instantaneas se implementarán de último. -->
+                                                                                        <!-- Busquedas instantaneas se implementarán de último. Lamentablemente no se podrá porque es muy complejo D:-->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdClienteOrden">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdClienteOrden" name="txt_idCliente" required>
 												<label class="mdl-textfield__label" for="IdClienteOrden">Escriba el código de cliente aquí</label>
 												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
 											</div>
                                                                                         <!-- Id_productos, pertenece a tabla detalle_ordenes -->
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                                                                         
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden" name="txt_producto" required>
 												<label class="mdl-textfield__label" for="IdProductoOrden">Escriba el código del producto aquí</label>
-												<span class="mdl-textfield__error">Id Inválido o no se encuentra el cliente.</span>
+												<span class="mdl-textfield__error">Id Inválido o no se encuentra el producto.</span>
 											</div>
                                                                                         
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                                                                             <p>Escriba la cantidad del producto.</p>
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden">
+												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="IdPRoductoOrden" name="txt_cantidad"equired>
 												<label class="mdl-textfield__label" for="IdProductoOrden">X</label>
 												<span class="mdl-textfield__error"></span>
 											</div>
-                                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                            <p>Total: </p>
-											</div>
+                                                                                        
                                                                                         
 										</div>
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Información adicional:</h5>
-				        
-                                   
-                                                                                        <!--
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text"  id="modelProduct">
-												<label class="mdl-textfield__label" for="modelProduct">Model</label>
-												<span class="mdl-textfield__error">Invalid model</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="markProduct">
-												<label class="mdl-textfield__label" for="markProduct">Mark</label>
-												<span class="mdl-textfield__error">Invalid Mark</span>
-											</div>
-											<h5 class="text-condensedLight">Other Data</h5>
-											<div class="mdl-textfield mdl-js-textfield">
-												<input type="date" class="mdl-textfield__input">
-											</div>
-											<div class="mdl-textfield mdl-js-textfield">
-												<select class="mdl-textfield__input">
-													<option value="" disabled="" selected="">Select status</option>
-													<option value="">Active</option>
-													<option value="">deactivated</option>
-												</select>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield">
-												<input type="file">
-											</div>-->
-										</div>
+										
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
-											<i class="zmdi zmdi-plus"></i>
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct" onclick="verificar()">
+											<i class="zmdi zmdi-shopping-cart"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addProduct">Añadir producto al órden</div>
+										<div class="mdl-tooltip" for="btn-addProduct">Añadir órden</div>
 									</p>
 								</form>
 							</div>

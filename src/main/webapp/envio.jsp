@@ -5,11 +5,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"%>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
 <!DOCTYPE html>
 <html lang="es">
+    <%
+        ConexionBD c = new ConexionBD();
+        int num = c.contarFilas("metodos_envio");
+        c.ConseguirMetodosEnvio();
+        %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -393,55 +399,54 @@ function SetSession(link, id){
 				</ul>
 			</nav>
 		</div>
-	</section>
+	</section> 
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-				<i class="zmdi zmdi-bus"></i>
+				<i class="zmdi zmdi-card"></i>
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Métodos de pago que los clientes podrán utilizar para pagar. Hola mudno
-				</p>
+                                    Métodos de Envío, utilizado en la creación de un órden.
+                                </p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewPayment" class="mdl-tabs__tab is-active">NUEVO</a>
-				<a href="#tabListPayment" class="mdl-tabs__tab">CONSULTAR</a>
+				<a href="#tabNewEnvio" class="mdl-tabs__tab is-active">Nuevo</a>
+				<a href="#tabListEnvio" class="mdl-tabs__tab">Consultar</a>
 			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewPayment">
+			<div class="mdl-tabs__panel is-active" id="tabNewEnvio">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nuevo método de envío
+								Nuevo método de Envío
 							</div>
 							<div class="full-width panel-content">
-								<form>
-									<h5 class="text-condensedLight">Datos del método</h5>
+								<form name="form" onsubmit="return false" method="POST" action="AnadirMetodoEnvio">
+									<h5 class="text-condensedLight">Data payment</h5>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NombreMetodoPago">
-										<label class="mdl-textfield__label" for="NombreMetodoPago">Nombre</label>
-										<span class="mdl-textfield__error">Nombre Inválido</span>
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NamePayment" name="txt_nombre">
+										<label class="mdl-textfield__label" for="NamePayment">Name</label>
+										<span class="mdl-textfield__error">Invalid name</span>
 									</div>
-                                                                        
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="DescripcionMetodoPago">
-										<label class="mdl-textfield__label" for="DescripcionMetodoPago">DescripcionMetodoPago</label>
-										<span class="mdl-textfield__error">Descripción Inválida</span>
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="descriptionPayment"name="txt_descripcion">
+										<label class="mdl-textfield__label" for="descriptionPayment">Description</label>
+										<span class="mdl-textfield__error">Invalid description</span>
 									</div>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto">
-                                                                                <label class="mdl-textfield__label" for="CostoProducto">Precio</label>
-                                                                                <span class="mdl-textfield__error">Costo Inválido</span>
-                                                                        </div>
+												<input class="mdl-textfield__input" type="text" pattern="-?[0-9.]*(\.[0-9]+)?" id="CostoProducto" name="txt_precio">
+												<label class="mdl-textfield__label" for="PrecioProducto">Precio</label>
+												<span class="mdl-textfield__error">Precio Inválido</span>
+											</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addPayment" onclick="verificar()">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addPayment">Añadir Método</div>
+										<div class="mdl-tooltip" for="btn-addPayment">Add payment</div>
 									</p>
 								</form>
 							</div>
@@ -449,78 +454,87 @@ function SetSession(link, id){
 					</div>
 				</div>
 			</div>
-                    
-			<div class="mdl-tabs__panel" id="tabListPayment">
+			<div class="mdl-tabs__panel" id="tabListEnvio">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de Métodos de Envío
+								Lista de los metodos de envío
 							</div>
 							<div class="full-width panel-content">
-                                                            
                                                             <%
-                                                                if (num == 0){
-                                                                
-                                                                %>
+                                                            /*
+                                                            ¿QUE SUCEDE AQUÍ?
+                                                            Esta condicion revisa cuantas filas hay en una tabla. Si no hay filas (num == 0), no hay usuarios.
+                                                            Si hay filas, entonces que muestre todos los usuarios.
+                                                            
+                                                            */
+                                                            if (num == 0 ){
+                                                            %>
                                                             <div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
+                                                                            
 										<span class="mdl-list__item-primary-content">
-                                                                                    <span>No existe categorias.</span>
+                                                                                    <span>No existe algún metodo de envío.</span>
 									</div>
-									<li class="full-width divider-menu-h"></li>
-                                                                   
-								</div>
-                                                            <% 
-                                                                } else{
+                
+                                                            <%
+                                                                }else{
+                                                                %>
                                                             
-                                                            %>
+                                                            <span class="mdl-typography--text-center">Existen <%=num  %> metodo(s) de envío.</span>
                                                             
-                                                <span class="mdl-typography--text-center" >Existen <%=num %> categoria(s).</span>
-                                                <a style="text-decoration:none; color:black" href="MarcasDesactivadas.jsp">
+                                                            <a style="text-decoration:none; color:black" href="MetodoEnvioDesactivado.jsp">
                                                             <button class="btn-subMenu" formaction="clientDesactivados.jsp">
                                                                 <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
                                                             </button>
                                                             <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
 								</a>
-								<form action="#">
+                                                            <form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarMarca">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCliente">
 											<i class="zmdi zmdi-search"></i>
 										</label>
 										<div class="mdl-textfield__expandable-holder">
-											<input class="mdl-textfield__input" type="text" id="BuscarMarca">
+                                                                                    
+                                                                                    <input class="mdl-textfield__input" type="text" id="BuscarCategoria" onkeyup="filtrar()">
 											<label class="mdl-textfield__label"></label>
-										</div>
+										
+                                                                                </div>
 									</div>
+                                                                    
 								</form>
-                                                                <%
-                                                                    while(c.rs.next()){
-                                                                    %>
-								<div class="mdl-list">
-									<div class="mdl-list__item mdl-list__item--two-line">
+    
+                                                            <%
+                                                                
+                                                            while(c.rs.next()){
+                                                            %>
+								<div class="mdl-list listFiltro">
+									<div class="mdl-list__item mdl-list__item--two-line Lista">
+                                                                            
 										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
-                                                                                        <span><%=c.rs.getString("nombre")   %></span>
-                                                                                        <span class="mdl-list__item-sub-title"><%= c.rs.getString("pais_origen") %></span>
+											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+											<span><%=c.rs.getString("nombre")%></span>
+                                                                                        <span class="mdl-list__item-sub-title"><%=c.rs.getString("descripcion") %></span>
+                                                                                        <span><small>Id: <%=c.rs.getInt("id_metodos_envio") %> | Precio: <%=c.rs.getFloat("costo") %></small></span>
+                                                                                        <br>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="MarcaModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_marcas")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action" href="EnvioActualizar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_metodos_envio")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
-                                                                        
-                                                                        <%
-                                                                            }
-
-                                                                                }
-                                                                        %>
+                                   <%                                     
+                                       }    }
+				%>
 								</div>
-							</div>
-                                                            
+                                                                
+                                                                
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 </body>

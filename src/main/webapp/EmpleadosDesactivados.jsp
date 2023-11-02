@@ -38,19 +38,19 @@
 	<script src="js/main.js" ></script>
         <script>
            
-        function verificar() {
+        function verificar(element) {
+            var id= element.getAttribute('data-id');
         Swal.fire({
             title: '¿Estás Seguro?',
-            text: 'Estás a punto de actualizar un usuario.',
+            text: 'Estás a punto de recuperar un usuario desactivado.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Sí',
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('¡Perfecto!', 'El cliente fue actualizado con éxito.', 'success').then(() => {
-                   document.form.action = 'RecuperarCliente';
-                    document.form.submit();
+                Swal.fire('¡Perfecto!', 'El cliente fue recuperado con éxito.', 'success').then(() => {
+                   SetSession('RecuperarEmpleado',id);
                 });
             } else if (result.isDismissed) {
                 Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
@@ -59,7 +59,21 @@
             }
         });
     }
-   
+   function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
       </script>  
     </head>
     <body>
@@ -68,7 +82,7 @@
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de empleados desactivados
+								Lista de proveedores desactivados
 							</div>
 							<div class="full-width panel-content">
                                                             <%
@@ -92,7 +106,10 @@
                                                                 %>
                                                             
                                                             <span class="mdl-typography--text-center">Existen <%=num  %> empleado(s) desactivados.</span>
-                                                            
+                                                            <button class="btn-subMenu" >
+                                                                <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
+                                                            </button>
+                                                            <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCliente">
@@ -115,10 +132,10 @@
                                                                             
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-                                                                                        <span><%=c.rs.getString("nombre")%> <%=c.rs.getString("apellido")  %> </span>
-                                                                                        <span class="mdl-list__item-sub-title">DPI: <%=c.rs.getString("Dpi")  %> | Telefono: <%=c.rs.getString("telefono") %> | Puesto: <%=c.rs.getString("puesto")  %></span>
+                                                                                        <span><%=c.rs.getString("nombre")%> <%=c.rs.getString("apellido")  %></span>
+                                                                                        <span class="mdl-list__item-sub-title">ID:<%=c.rs.getInt("id_empleados")  %> || Puesto: <%=c.rs.getString("puesto") %></span>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action" href="EmpleadosModificar.jsp" onclick="" style="color:black"><i class="zmdi zmdi-edit"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar(this)" data-id="<%=c.rs.getInt("id_empleados")%>" style="color:black"><i class="zmdi zmdi-archive"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

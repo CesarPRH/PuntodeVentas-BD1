@@ -38,19 +38,19 @@
 	<script src="js/main.js" ></script>
         <script>
            
-        function verificar() {
+        function verificar(element) {
+            var id= element.getAttribute('data-id');
         Swal.fire({
             title: '¿Estás Seguro?',
-            text: 'Estás a punto de actualizar un usuario.',
+            text: 'Estás a punto de recuperar un usuario desactivado.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Sí',
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('¡Perfecto!', 'El cliente fue actualizado con éxito.', 'success').then(() => {
-                   document.form.action = 'RecuperarCliente';
-                    document.form.submit();
+                Swal.fire('¡Perfecto!', 'El cliente fue recuperado con éxito.', 'success').then(() => {
+                   SetSession('RecuperarMarca',id);
                 });
             } else if (result.isDismissed) {
                 Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
@@ -59,7 +59,21 @@
             }
         });
     }
-   
+   function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
       </script>  
     </head>
     <body>
@@ -68,7 +82,7 @@
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista de categorias Desactivadas
+								Lista de marcas desactivadas
 							</div>
 							<div class="full-width panel-content">
                                                             <%
@@ -84,15 +98,18 @@
 									<div class="mdl-list__item mdl-list__item--two-line">
                                                                             
 										<span class="mdl-list__item-primary-content">
-                                                                                    <span>No existe categorias.</span>
+                                                                                    <span>No existe marcas desactivadas.</span>
 									</div>
                 
                                                             <%
                                                                 }else{
                                                                 %>
                                                             
-                                                            <span class="mdl-typography--text-center">Existen <%=num  %> categorias(s) desactivados.</span>
-                                                            
+                                                            <span class="mdl-typography--text-center">Existen <%=num  %> marca(s) desactivadas.</span>
+                                                            <button class="btn-subMenu" >
+                                                                <i class="zmdi zmdi-eye" id="btn-mirarDesactivados"></i>
+                                                            </button>
+                                                            <div class="mdl-tooltip" for="btn-mirarDesactivados" >Mirar Desactivados</div>
 								<form action="#">
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="BuscarCliente">
@@ -116,9 +133,9 @@
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
 											<span><%=c.rs.getString("nombre")%></span>
-											<span class="mdl-list__item-sub-title">ID:<%=c.rs.getString("pais_origen")%></span>
+                                                                                        <span class="mdl-list__item-sub-title">ID:<%=c.rs.getInt("id_marcas")  %> || Pais de Origen:<%=c.rs.getString("pais_origen") %></span>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar()" style="color:black"><i class="zmdi zmdi-archive"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar(this)" data-id="<%=c.rs.getInt("id_marcas")%>" style="color:black"><i class="zmdi zmdi-archive"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

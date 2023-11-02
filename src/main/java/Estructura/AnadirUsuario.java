@@ -38,7 +38,7 @@ public class AnadirUsuario extends HttpServlet {
             String s_usuario = (String) request.getAttribute("s_usuario");
             String s_contraseña = (String) request.getAttribute("s_contraseña");
             String s_dpi = (String) request.getAttribute("s_dpi");
-            
+            String redirected =(String)request.getAttribute("redirected");
             System.out.println("Atributos: "+s_usuario+" "+s_contraseña+" "+s_dpi);
             
             if(s_usuario!= null && s_contraseña!= null && s_dpi!=null){
@@ -55,8 +55,19 @@ public class AnadirUsuario extends HttpServlet {
                 out.println("<h1>Todo esta bien :)</h1>");
                 
                 out.println("</body></html>");
+                if(redirected == "Empleado"){
                     c.AnadirUsuario(s_usuario, s_contraseña, i_id);
+                    response.sendRedirect("home.jsp");}
+                else if(redirected == "Administrador"){
+                    c.AnadirAdministrador(i_id, s_usuario, s_contraseña);
                     response.sendRedirect("home.jsp");
+                }else{
+                    out.println("<html> <body>");
+                out.println("<h1>Ocurrio un error por algunas razones.</h1>");
+                out.println("<p> Redirected:" + redirected + "</p>");
+                
+                out.println("</body></html>");
+                }
                 }catch(SQLException ex){
                 out.println("<html> <body>");
                 out.println("<h1>Error Occurred while adding category</h1>");

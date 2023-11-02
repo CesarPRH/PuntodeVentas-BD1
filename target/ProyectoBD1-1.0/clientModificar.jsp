@@ -112,8 +112,8 @@
 									</div>
                         
                                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" name="txt_nit" type="text" id="NITCliente" value="<%=c.rs.getString("nit")  %>" readonly>
-										<label class="mdl-textfield__label" for="NITCliente">NIT (¡Tampoco podrás modificar esto!)</label>
+										<input class="mdl-textfield__input" name="txt_nit" type="text" id="NITCliente" value="<%=c.rs.getString("nit")  %>">
+										<label class="mdl-textfield__label" for="NITCliente">NIT</label>
 										<span class="mdl-textfield__error">NIt Inválido</span>
                                                                                 </div>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

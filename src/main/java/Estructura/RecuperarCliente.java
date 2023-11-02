@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 /**
@@ -33,12 +34,26 @@ public class RecuperarCliente extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             ConexionBD c = new ConexionBD();
-            
-            String s_id = request.getParameter("txt_id");
-            int i_id = Integer.parseInt(s_id);
+            HttpSession session = request.getSession();
+            String s_id =(String) session.getAttribute("id");
+            //String s_id = request.getParameter("txt_id");
+           // int i_id = Integer.parseInt(s_id);
             out.println("<html> <body>");
-                out.println("<h1>I like watching videos of black men shaking their booties</h1>");
-
+                out.println("<h1>Vamoooooos funcionó el servlet Te amo mucho</h1>");
+                out.println("<h1>"+s_id+"</h1>");
+                if(s_id!=null){
+                    try{
+                       int i_id = Integer.parseInt(s_id);
+                       c.recuperarCliente(i_id);
+                       response.sendRedirect("home.jsp");
+                       
+                    }catch(SQLException ex){
+                out.println("<html> <body>");
+                out.println("<h1>Error Occurred while adding category</h1>");
+                out.println("<p>" + ex.getMessage() + "</p>");
+                out.println("</body></html>");
+            }
+                }
                 
                 out.println("</body></html>");
             /*

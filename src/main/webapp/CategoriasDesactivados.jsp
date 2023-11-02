@@ -38,19 +38,19 @@
 	<script src="js/main.js" ></script>
         <script>
            
-        function verificar() {
+        function verificar(element) {
+            var id= element.getAttribute('data-id');
         Swal.fire({
             title: '¿Estás Seguro?',
-            text: 'Estás a punto de actualizar un usuario.',
+            text: 'Estás a punto de recuperar una categoria desactivada.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Sí',
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('¡Perfecto!', 'El cliente fue actualizado con éxito.', 'success').then(() => {
-                   document.form.action = 'RecuperarCliente';
-                    document.form.submit();
+                Swal.fire('¡Perfecto!', 'La categoría fue recuperado con éxito.', 'success').then(() => {
+                   SetSession('RecuperarCategorias',id);
                 });
             } else if (result.isDismissed) {
                 Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
@@ -59,8 +59,22 @@
             }
         });
     }
-   
-      </script>  
+   function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
+      </script> 
     </head>
     <body>
      <div class="mdl-tabs__panel" id="tabListClient">
@@ -118,7 +132,7 @@
 											<span><%=c.rs.getString("nombre")%></span>
 											<span class="mdl-list__item-sub-title">ID:<%=c.rs.getString("descripcion") %></span>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar()" style="color:black"><i class="zmdi zmdi-archive"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action"  onclick="verificar(this)" data-id="<%=c.rs.getInt("id_categorias")  %>" style="color:black"><i class="zmdi zmdi-archive"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

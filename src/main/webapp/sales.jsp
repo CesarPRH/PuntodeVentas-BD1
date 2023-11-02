@@ -5,11 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Estructura.ConexionBD"   %>
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 -->
 <!DOCTYPE html>
 <html lang="es">
+    <%
+        ConexionBD c = new ConexionBD();
+        c.mostrarOrdenInfo();
+        %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -340,8 +345,8 @@
 			<div class="full-width header-well-text">
                            
 				<p class="text-condensedLight">
-                                    Añade un nuevo empleado en el sistema, o simplemenente consulta los administradores<br> (donde podrás modificar o eliminarlo).
-				</p>
+                                    Supervise las ventas y devoluciones del sistema.
+                                </p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -364,22 +369,29 @@
                                                                             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop" id="ventas">
                                                                                         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                                                                                 <thead>
+                                                                                                    
                                                                                                         <tr>
-                                                                                                                <th class="mdl-data-table__cell--non-numeric">Date</th>
-                                                                                                                <th>Client</th>
-                                                                                                                <th>Payment</th>
+                                                                                                                <th class="mdl-data-table__cell--non-numeric">Producto</th>
+                                                                                                                <th>Cliente</th>
+                                                                                                                <th>Cantidad</th>
                                                                                                                 <th>Total</th>
-                                                                                                                <th>Options</th>
+                                                                                                                <th>Opciones</th>
                                                                                                         </tr>
                                                                                                 </thead>
                                                                                                 <tbody>
+                                                                                                    <%
+                                                                                                        while(c.rs.next()){
+                                                                                                        %>
                                                                                                         <tr>
-                                                                                                                <td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-                                                                                                                <td>Client name</td>
-                                                                                                                <td>Credit</td>
-                                                                                                                <td>$77</td>
+                                                                                                            <td class="mdl-data-table__cell--non-numeric"><%=c.rs.getString("producto_nombre")  %></td>
+                                                                                                                <td><%= c.rs.getString("cliente_nombre")%></td>
+                                                                                                                <td><%= c.rs.getInt("cantidad_orden")%></td>
+                                                                                                                <td><%=c.rs.getFloat("total")%></td>
                                                                                                                 <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
                                                                                                         </tr>
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
 
                                                                                                 </tbody>
                                                                                         </table>

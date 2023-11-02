@@ -502,16 +502,16 @@ function SetSession(link, id){
 									</div>
 								</form>
                                                                 <%
-                                                                    while(c.rs.next()){
+                                                                    while(c.rsAux.next()){
                                                                     %>
 								<div class="mdl-list">
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-label mdl-list__item-avatar"></i>
-                                                                                        <span><%=c.rs.getString("nombre")   %></span>
-                                                                                        <span class="mdl-list__item-sub-title"><%= c.rs.getString("pais_origen") %></span>
+                                                                                        <span><%=c.rsAux.getString("nombre")   %></span>
+                                                                                        <span class="mdl-list__item-sub-title"><%= c.rsAux.getString("pais_origen") %></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="MarcaModificar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_marcas")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
+										<a class="mdl-list__item-secondary-action" href="MarcaModificar.jsp" onclick="SetSession(this, '<%=c.rsAux.getString("id_marcas")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                                                         
