@@ -449,11 +449,11 @@
                             <i class="zmdi zmdi-shopping-cart-plus tile-icon"></i>
                         </article>
                             </a>
-                        <a href="promociones.jsp">
+                        <a href="ComprasStock.jsp">
                             <article class="full-width tile">
                                 <div class="tile-text">
                                     <span class="text-condensedLight">
-                                       Promociones
+                                       Historial de Compras
                                     </span>
                                 </div>
                                 <i class="zmdi zmdi-parking tile-icon"></i>

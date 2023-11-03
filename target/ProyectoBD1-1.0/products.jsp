@@ -544,8 +544,9 @@ function SetSession(link, id){
 												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="StockProducto" name="txt_stock">
 												<label class="mdl-textfield__label" for="StockProducto"> Stock disponible</label>
 												<span class="mdl-textfield__error">Stock Inválido</span>
-											</div>         
-                                                                                        <div><input type="checkbox" id="toggle" name="txt_promocion" value="si">       Promoción   </div>
+											</div>       
+                                                                                           <!--     
+                                                                                        <div><input type="checkbox" id="toggle" name="txt_promocion" value="si" >       Promoción   </div>
                                                                                         
                                                                                         
                                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " >
@@ -569,7 +570,7 @@ function SetSession(link, id){
 												<label class="mdl-textfield__label" for="FechaFinalDescuento">Fecha Final</label>
 												<span class="mdl-textfield__error">Fecha inválida</span>
 											</div>	
-                                                                                        
+                                                                                        -->
                                                                                         
 										</div>
 									</div>

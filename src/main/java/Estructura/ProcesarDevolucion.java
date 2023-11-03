@@ -4,7 +4,6 @@
  */
 package Estructura;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Cesar S
  */
-public class OrdenUltimo extends HttpServlet {
+public class ProcesarDevolucion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,52 +32,36 @@ public class OrdenUltimo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
             ConexionBD c = new ConexionBD();
             
-            String s_cliente = (String) request.getAttribute("cliente");
-            String s_producto =(String) request.getAttribute("producto");
-            String s_cantidad = (String) request.getAttribute("cantidad");
-            String s_metodoEnvio = (String) request.getAttribute("metodoEnvio");
-            
-            try{
-                int i_cliente = Integer.parseInt(s_cliente);
-                int i_producto = Integer.parseInt(s_producto);
-                int i_cantidad = Integer.parseInt(s_cantidad);
-                Integer i_detalle_orden = null;
+            String s_id = request.getParameter("txt_id");
+            String s_motivo = request.getParameter("txt_motivo");
+            if(s_id!=null && s_motivo!=null){
+                try{
+                    int i_id = Integer.parseInt(s_id);
                 
-                c.ConseguirInfoDetalleOrden(i_producto, i_cantidad);
-                if(c.rs.next()){
-                    i_detalle_orden = c.rs.getInt("id_detalles_orden");
-                }
-                c.AnadirOrden(i_cliente, i_detalle_orden);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("DetallesEnvio");
-                request.setAttribute("metodoEnvio", s_metodoEnvio);
-                request.setAttribute("cliente", s_cliente);
-                request.setAttribute("producto", s_producto);
-                request.setAttribute("cantidad", s_cantidad);
-                request.setAttribute("id_detalles_orden", i_detalle_orden);
-                
-                dispatcher.forward(request, response);
-                
-            }catch(SQLException ex){
+                c.AnadirDevolucion(i_id, s_motivo);
+                response.sendRedirect("home.jsp");
+                }catch(SQLException ex){
                 out.println("<html> <body>");
                 out.println("<h1>Error Occurred while adding category</h1>");
                 out.println("<p>" + ex.getMessage() + "</p>");
                 out.println("</body></html>");
             }
-            
-            
-            out.println("<!DOCTYPE html>");
+                
+            }else{
+                 out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrdenUltimo</title>");            
+            out.println("<title>Servlet ProcesarDevolucion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrdenUltimo at " + request.getContextPath() + "</h1>");
-            out.println("<h1>"+s_cliente+s_producto+s_cantidad+"</h1>");
+            out.println("<h1>Servlet ProcesarDevolucion at " + request.getContextPath() +s_id+s_motivo+ "</h1>");
             out.println("</body>");
             out.println("</html>");
+            }
+            
+           
         }
     }
 

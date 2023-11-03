@@ -14,13 +14,14 @@
     <%
         ConexionBD c = new ConexionBD();
         c.mostrarOrdenInfo();
+        c.MostrarDevoluciones();
         %>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sales</title>
+	<title>Clients</title>
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/sweetalert2.css">
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -28,9 +29,81 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
-	<script src="js/sweetalert2.min.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        
+ <script>
+     
+     //Alerta SweetAlert2
+     /*
+      * Esta alerta es utilizado para que el usuario verifique si quiere hacer cambios.
+      * 
+      */
+    function verificar() {
+        Swal.fire({
+            title: '¿Estás Seguro?',
+            text: 'Estás a punto de añadir un nuevo usuario.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('¡Perfecto!', 'El cliente fue añadido con éxito.', 'success').then(() => {
+                  //  document.form.action = 'Estructura.AnadirCliente';
+                    document.form.submit();
+                });
+            } else if (result.isDismissed) {
+                Swal.fire('Cancelado.', 'Cancelaste la transacción :(', 'error').then(() => {
+                  // window.location.href = 'client.jsp';
+                });
+            }
+        });
+    }
+    
+ //Funcion filtrar
+ /*
+  * Esta función es utilizado para filtrar y buscar usuarios por nombre. Tiene un pequeño bug que las líneas aparecen.
+  * 
+  */
+    function filtrar() {
+  var input, lista, div;
+  input = document.getElementById("BuscarCliente");
+  filter = input.value.toUpperCase();
+  lista = document.getElementsByClassName("mdl-list__item mdl-list__item--two-line Lista");
+  //linea = document.getElementsByClassName("full-width divider-menu-h");
+  for (var i = 0; i < lista.length; i++) {
+    var a = lista[i];
+   // var b = linea[i];
+    var text = a.textContent || a.innerText;
+
+    if (text.toUpperCase().indexOf(filter) > -1) {
+      a.style.display = "";
+    //  b.style.display = "";
+    } else {
+      a.style.display = "none";
+    //b.style.display = "none";
+    }
+  }
+}
+
+function SetSession(link, id){
+    
+    console.log("SetSession called with link:", link, "and id:", id);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            window.location.href = link.href;
+        }
+    };
+    xhttp.open("POST","SetSessionServlet", true);
+    xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+    
+}
+</script>
 </head>
 <body>
 	<!-- Notifications area -->
@@ -387,7 +460,7 @@
                                                                                                                 <td><%= c.rs.getString("cliente_nombre")%></td>
                                                                                                                 <td><%= c.rs.getInt("cantidad_orden")%></td>
                                                                                                                 <td><%=c.rs.getFloat("total")%></td>
-                                                                                                                <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+                                                                                                                <td><a class="mdl-list__item-secondary-action" href="Factura.jsp" onclick="SetSession(this, '<%=c.rs.getInt("id_ordenes") %>')" style="color:black"><i class="zmdi zmdi-eye"></i></a></td>
                                                                                                         </tr>
                                                                                                         <%
                                                                                                             }
@@ -424,22 +497,29 @@
                                                                                         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                                                                                 <thead>
                                                                                                         <tr>
-                                                                                                                <th class="mdl-data-table__cell--non-numeric">Date</th>
-                                                                                                                <th>Id del órden</th>
+                                                                                                                <th class="mdl-data-table__cell--non-numeric">Fecha de Orden</th>
+                                                                                                                <th>Cliente</th>
+                                                                                                                <th>Código del órden</th>
+                                                                                                                <th>Producto</th>
                                                                                                                 <th>motivo</th>
-                                                                                                                <th>fecha de solicitud</th>
-                                                                                                                <th>Options</th>
+                                                                                                               
+                                                                                                                
                                                                                                         </tr>
                                                                                                 </thead>
                                                                                                 <tbody>
+                                                                                                    <%
+                                                                                                        while(c.rsAux2.next()){
+                                                                                                        %>
                                                                                                         <tr>
-                                                                                                                <td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-                                                                                                                <td>Client name</td>
-                                                                                                                <td>Credit</td>
-                                                                                                                <td>$77</td>
-                                                                                                                <td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
+                                                                                                                <td class="mdl-data-table__cell--non-numeric"><%= c.rsAux2.getDate("fecha_orden") %></td>
+                                                                                                                <td><%= c.rsAux2.getString("nombre") %></td>
+                                                                                                                <td><%= c.rsAux2.getInt("id_ordenes") %></td>
+                                                                                                                <td><%= c.rsAux2.getString("producto")  %></td>
+                                                                                                                <td><%= c.rsAux2.getString("motivo")  %></td>
                                                                                                         </tr>
-
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
                                                                                                 </tbody>
                                                                                         </table>
                                                                                 </div>

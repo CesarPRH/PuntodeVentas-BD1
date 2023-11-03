@@ -507,19 +507,19 @@ function SetSession(link, id){
     
                                                             <%
                                                                 
-                                                            while(c.rs.next()){
+                                                            while(c.rsAux2.next()){
                                                             %>
 								<div class="mdl-list listFiltro">
 									<div class="mdl-list__item mdl-list__item--two-line Lista">
                                                                             
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span><%=c.rs.getString("nombre")%></span>
-                                                                                        <span class="mdl-list__item-sub-title"><%=c.rs.getString("descripcion") %></span>
-                                                                                        <span><small>Id: <%=c.rs.getInt("id_metodos_envio") %> | Precio: <%=c.rs.getFloat("costo") %></small></span>
+											<span><%=c.rsAux2.getString("nombre")%></span>
+                                                                                        <span class="mdl-list__item-sub-title"><%=c.rsAux2.getString("descripcion") %></span>
+                                                                                        <span><small>Id: <%=c.rsAux2.getInt("id_metodos_envio") %> | Precio: <%=c.rsAux2.getFloat("costo") %></small></span>
                                                                                         <br>
 										</span>
-                                                                                        <a class="mdl-list__item-secondary-action" href="EnvioActualizar.jsp" onclick="SetSession(this, '<%=c.rs.getString("id_metodos_envio")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
+                                                                                        <a class="mdl-list__item-secondary-action" href="EnvioActualizar.jsp" onclick="SetSession(this, '<%=c.rsAux2.getString("id_metodos_envio")%>')" style="color:black"><i class="zmdi zmdi-edit"></i></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
                                    <%                                     

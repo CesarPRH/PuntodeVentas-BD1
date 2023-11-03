@@ -160,6 +160,14 @@
         <servlet-name>CompraUltimo</servlet-name>
         <servlet-class>Estructura.CompraUltimo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetallesEnvio</servlet-name>
+        <servlet-class>Estructura.DetallesEnvio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcesarDevolucion</servlet-name>
+        <servlet-class>Estructura.ProcesarDevolucion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ClienteAnadir</servlet-name>
         <url-pattern>/ClienteAnadir</url-pattern>
@@ -319,6 +327,14 @@
     <servlet-mapping>
         <servlet-name>CompraUltimo</servlet-name>
         <url-pattern>/CompraUltimo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetallesEnvio</servlet-name>
+        <url-pattern>/DetallesEnvio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcesarDevolucion</servlet-name>
+        <url-pattern>/ProcesarDevolucion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

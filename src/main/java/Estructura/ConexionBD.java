@@ -1011,7 +1011,7 @@ public class ConexionBD {
           e.printStackTrace();
       }
     }
-    
+    //Hay muchos metodos que basicamente hacen la misma cosa, pero que se quede asi.
     public void mostrarOrdenInfo() throws SQLException{
         try{
             ps = conectar().prepareStatement("Select * from vista_orden_info");
@@ -1023,13 +1023,35 @@ public class ConexionBD {
       }
     }
     
-           
+    public void conseguirInfoOrdenOrdenado(int clienteId, int detallesOrdenId) throws SQLException{
+        try{
+            ps = conectar().prepareStatement("Select * from vista_orden where cliente_id=? and detalles_ordenes_id=? order by id_ordenes desc");
+            ps.setInt(1, clienteId);
+            ps.setInt(2, detallesOrdenId);
+            rs = ps.executeQuery();
+            conectar().close();
+        }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+    }
+    
+    public void conseguirInfoOrdenConId(int id) throws SQLException{
+        try{
+            ps = conectar().prepareStatement("Select * from vista_orden where id_ordenes="+id);
+            rs = ps.executeQuery();
+            conectar().close();
+        }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+    }
 //------------------------------------------METODOS DE ENVIO-----------------------------------
     
     public void ConseguirMetodosEnvio() throws SQLException{
 try{
     ps = conectar().prepareStatement("Select * from vista_metodos_envio_activos");
-    rs = ps.executeQuery();
+    rsAux2 = ps.executeQuery();
     conectar().close();
     }catch(SQLException e){
           System.err.println("SQLException: "+e.getMessage());
@@ -1073,6 +1095,7 @@ try{
       }
     }
     
+    
     public void ActualizarMetodosEnvio(int id, String nombre, String descripcion, float costo) throws SQLException{
         try{
             ps = conectar().prepareStatement("{call actualizar_metodo_envio(?,?,?,?,'A')}");
@@ -1087,6 +1110,7 @@ try{
           e.printStackTrace();
       }
     }
+    
     
     public void EliminarMetodoEnvio(int id) throws SQLException{
         try{
@@ -1148,6 +1172,88 @@ try{
         rs = ps.executeQuery();
         conectar().close();
     }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     
+     public void ConseguirInformacionGeneralCompras() throws SQLException{
+         try{
+             ps = conectar().prepareStatement("Select * from vista_informacion_compras");
+             rs = ps.executeQuery();
+             conectar().close();
+         }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     
+     
+     //----------------ENVIO Y DIRECCIONES----------------------------------
+     
+     public void AnadirDireccionesEnvio(int clienteId, String direccion, String ciudad, String referencia) throws SQLException{
+         try{
+             ps = conectar().prepareStatement("{call insertar_direccion_envio(?,?,?,?)}");
+             ps.setInt(1, clienteId);
+             ps.setString(2, direccion);
+             ps.setString(3, ciudad);
+             ps.setString(4, referencia);
+             ps.executeUpdate();
+             conectar().close();
+         }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     
+     
+     
+     public void AnadirDetallesEnvio(int ordenesId, int metodoEnvioId)throws SQLException{
+         try{
+             ps = conectar().prepareStatement("{ call insertar_detalle_envio(?,?,SYSDATE)}");
+             ps.setInt(1, ordenesId);
+             ps.setInt(2, metodoEnvioId);
+             ps.executeUpdate();
+             conectar().close();
+         }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     
+     public void ConseguirInfoCompleto(int ordenes_id) throws SQLException{
+         try{
+             ps = conectar().prepareStatement("select * from vista_informacion_completa where ordenes_id=?");
+             ps.setInt(1, ordenes_id);
+             rs = ps.executeQuery();
+             conectar().close();
+             
+         }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     //------------------------------DEVOLUCIONES (ULTIMA COSA Y ME DUERMO)------------------------
+     public void MostrarDevoluciones() throws SQLException{
+         try{
+             ps = conectar().prepareStatement("select * from vista_informacion_devoluciones_activas");
+             rsAux2 = ps.executeQuery();
+             conectar().close();
+         }catch(SQLException e){
+          System.err.println("SQLException: "+e.getMessage());
+          e.printStackTrace();
+      }
+     }
+     
+     public void AnadirDevolucion(int ordenId, String motivo) throws SQLException{
+         try{
+             ps= conectar().prepareStatement("{call insertar_devolucion(?,?,SYSDATE,'A')}");
+         ps.setInt(1, ordenId);
+         ps.setString(2, motivo);
+         ps.executeUpdate();
+         conectar().close();
+         
+     }catch(SQLException e){
           System.err.println("SQLException: "+e.getMessage());
           e.printStackTrace();
       }

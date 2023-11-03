@@ -38,20 +38,30 @@ public class AnadirOrden extends HttpServlet {
             String s_cliente = request.getParameter("txt_cliente");
             String s_producto = request.getParameter("txt_producto");
             String s_cantidad = request.getParameter("txt_cantidad");
+            String s_direccion = request.getParameter("txt_direccion");
+            String s_ciudad = request.getParameter("txt_ciudad");
+            String s_referencia = request.getParameter("txt_referencia");
+            String s_idMetodoEnvio = request.getParameter("txt_metodoEnvio");
             System.out.println(s_cliente);
-           if (s_cliente!=null && s_producto!=null && s_cantidad!=null){
+           if (s_cliente!=null && s_producto!=null && s_cantidad!=null && s_direccion!=null && s_ciudad!=null
+                   && s_referencia!=null && s_idMetodoEnvio!=null){
                try{
                    int i_cliente = Integer.parseInt(s_cliente);
                    int i_producto = Integer.parseInt(s_producto);
                    int i_cantidad = Integer.parseInt(s_cantidad);
+                   
                    
                    RequestDispatcher dispatcher = request.getRequestDispatcher("OrdenUltimo");
                    
                    request.setAttribute("cliente", s_cliente);
                    request.setAttribute("producto", s_producto);
                    request.setAttribute("cantidad",s_cantidad);
+                   request.setAttribute("metodoEnvio", s_idMetodoEnvio);
+                   
                    
                    c.AnadirOrdenDetalles(i_producto, i_cantidad);
+                   c.AnadirDireccionesEnvio(i_cliente, s_direccion, s_ciudad, s_referencia);
+                   
                    dispatcher.forward(request, response);
                }catch(SQLException ex){
                 out.println("<html> <body>");

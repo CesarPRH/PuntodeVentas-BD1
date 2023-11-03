@@ -113,10 +113,44 @@
 									<li class="full-width divider-menu-h"></li>
                                                                         <div class="mdl-list__item mdl-list__item--two-line Lista">										<span class="mdl-list__item-primary-content">
 											
-                                                                                <span>Total a pagar: Q<%= totalPagar %></span>
+                                                                                <span>Subtotal: Q<%= totalPagar %></span>
 									</div>
                                   
 								</div>
+                                                                        <hr>
+                                                                        <div class="full-width panel-tittle bg-info text-center tittles">
+								Información del envío
+							</div>
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                            <input class="mdl-textfield__input" type="text"  id="direccion" name="txt_direccion" >
+                                                                                <label class="mdl-textfield__label" for="direccion">Dirección (Barrio, Calle, etc...)</label>
+                                                                                <span class="mdl-textfield__error">Dirección Inválido</span>
+                                                                        </div>
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                            <input class="mdl-textfield__input" type="text"  id="ciudad" name="txt_ciudad" >
+                                                                                <label class="mdl-textfield__label" for="ciudad">Ciudad</label>
+                                                                                <span class="mdl-textfield__error">Ciudad Invalida</span>
+                                                                        </div>
+                                                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                                            <input class="mdl-textfield__input" type="text"  id="referencia" name="txt_referencia" >
+                                                                                <label class="mdl-textfield__label" for="referencia">Referencia</label>
+                                                                                <span class="mdl-textfield__error">Referencia Inválida</span>
+                                                                        </div>
+                                                                        <div class="mdl-textfield mdl-js-textfield">
+												<select class="mdl-textfield__input" name="txt_metodoEnvio">
+													<option value="" disabled="" selected="">Selecciona El método de envío</option>
+                                                                    <!-- Aquí se va a utilizar un ciclo para mostrar todas las categorías -->
+                                                                    <%
+                                                                        //Esta utilizar rs
+                                                                          c.ConseguirMetodosEnvio();
+                                                                        while(c.rsAux2.next()){
+                                                                        %>
+                                                                        <option value="<%= c.rsAux2.getInt("id_metodos_envio") %>"><%= c.rsAux2.getString("nombre") %> - Q<%=c.rsAux2.getFloat("costo")  %></option>
+                                                                                                        <%
+                                                                                                            }
+                                                                                                            %>
+												</select>
+											</div>
                                                                         <div class="full-width" style="text-align:center">¿Estas seguro del orden?</div>
                                                                         <div class="full-width" style="margin-left:auto; margin-right:auto; width:50%; display:flex; justify-content:center;place-items: center">
                                                                             <button class="mdl-button mdl-button--colored bg-info mdl-js-button mdl-button mdl-js-ripple-effect" onclick="document.form.action='AnadirOrden';document.form.submit();">Si</button>
